@@ -15,6 +15,9 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var prefectureLabel: UILabel!
     
+    static let identifier = "ListCell"
+    static let height: CGFloat = 65.0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +25,6 @@ class ListTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
@@ -32,10 +34,12 @@ class ListTableViewCell: UITableViewCell {
         let jsonData = Common.jsonDatas
         
         let imageString = jsonData![indexPath.section]["image"] as? String
+        let nameString = jsonData![indexPath.section]["hiragana"] as? String
+        let prefectureArray = jsonData![indexPath.section]["prefecture"] as? NSArray
         
         Common().imageFromStringURL(imageView: urlImageView, string: imageString)
-        nameLabel.text = jsonData![indexPath.section]["hiragana"] as? String
-        prefectureLabel.text = jsonData![indexPath.section]["prefecture"] as? String
+        Common().setValueToLabel(label: nameLabel, string: nameString)
+        Common().setValueToLabel(label: prefectureLabel, string: prefectureArray?[indexPath.row] as? String)
     }
     
 }

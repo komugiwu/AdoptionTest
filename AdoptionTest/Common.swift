@@ -35,22 +35,34 @@ class Common {
         }
     }
     
-    //Others
+    //Mark : Set cell related
     
-    func imageFromStringURL(imageView: UIImageView!, string: String?) {
+    func imageFromStringURL(imageView: UIImageView?, string: String?) {
+        guard imageView == imageView else {
+            return
+        }
+        
         var data: Data
         do {
-            let url = Common().stringToURL(string: string)!
-            print(url)
-            try data = Data(contentsOf: url)
+            let url = Common().stringToURL(string: string)
+            try data = Data(contentsOf: url!)
         }
         catch {
-            fatalError("Failed of load image from URL")
+            fatalError("Failed to load image from URL")
         }
-        imageView.image = UIImage.init(data: data)
+ 
+        let image = UIImage.init(data: data)!
+        imageView?.image = image
     }
     
     func stringToURL(string: String?) -> URL? {
-        return URL.init(string: string!)
+        return URL(string: string!)
+    }
+    
+    func setValueToLabel(label: UILabel?, string: String?) {
+        guard label == label else {
+            return
+        }
+        label?.text = string
     }
 }

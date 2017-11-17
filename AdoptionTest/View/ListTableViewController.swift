@@ -30,8 +30,9 @@ class ListTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else {
+            fatalError("The dequeued cell is not an instance of ListTableViewCell")
+        }
         ListTableViewCell().setCells(indexPath: indexPath)
         return cell
     }
@@ -47,6 +48,10 @@ class ListTableViewController: UITableViewController {
         seletedSection = indexPath.section
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return ListTableViewCell.height
+    }
+    
     //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

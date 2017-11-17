@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="65" id="RlP-Qv-fkP" customClass="ListTableViewCell" customModule="AdoptionTest" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" rowHeight="65" id="RlP-Qv-fkP" customClass="ListTableViewCell" customModule="AdoptionTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RlP-Qv-fkP" id="v3M-9j-R7Z">
@@ -93,9 +93,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="nameLabel" destination="crv-41-QOY" id="o4J-K5-Ilq"/>
-                                    <outlet property="prefectureLabel" destination="udZ-1Q-9sj" id="PJi-OH-5wQ"/>
-                                    <outlet property="urlImageView" destination="gsW-iZ-bGA" id="I0l-Gh-Mlo"/>
+                                    <outlet property="nameLabel" destination="udZ-1Q-9sj" id="0iN-v6-9iG"/>
+                                    <outlet property="prefectureLabel" destination="crv-41-QOY" id="JrB-bm-TVS"/>
+                                    <outlet property="urlImageView" destination="gsW-iZ-bGA" id="Her-wZ-Idt"/>
                                     <segue destination="Dsf-j9-rlB" kind="show" id="J9R-i7-Wqi"/>
                                 </connections>
                             </tableViewCell>
