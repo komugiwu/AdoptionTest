@@ -41,5 +41,4 @@ class ListTableViewCell: UITableViewCell {
         Common().setValueToLabel(label: nameLabel, string: nameString)
         Common().setValueToLabel(label: prefectureLabel, string: prefectureArray?[indexPath.row] as? String)
     }
-    
 }

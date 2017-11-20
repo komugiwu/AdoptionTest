@@ -20,6 +20,8 @@
 		81B39E411FBC291900F71ED7 /* AdoptionTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81B39E3F1FBC291900F71ED7 /* AdoptionTest.xcdatamodeld */; };
 		81B39E431FBC291900F71ED7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B39E421FBC291900F71ED7 /* Assets.xcassets */; };
 		81B39E461FBC291900F71ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81B39E441FBC291900F71ED7 /* LaunchScreen.storyboard */; };
+		81CE85791FC27A6100321B3F /* StoryboardB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81CE85781FC27A6100321B3F /* StoryboardB.storyboard */; };
+		81CE857B1FC27A7000321B3F /* StoryboardC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81CE857A1FC27A7000321B3F /* StoryboardC.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		81B39E451FBC291900F71ED7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81B39E471FBC291900F71ED7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81B39E571FBC2BDD00F71ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		81CE85781FC27A6100321B3F /* StoryboardB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardB.storyboard; sourceTree = "<group>"; };
+		81CE857A1FC27A7000321B3F /* StoryboardC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardC.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,8 @@
 				81B39E381FBC291900F71ED7 /* AppDelegate.swift */,
 				812BD11E1FBC2D7F00A06688 /* Common.swift */,
 				81B39E3C1FBC291900F71ED7 /* Main.storyboard */,
+				81CE85781FC27A6100321B3F /* StoryboardB.storyboard */,
+				81CE857A1FC27A7000321B3F /* StoryboardC.storyboard */,
 				812BD1211FBC2F2300A06688 /* json.txt */,
 				81B39E421FBC291900F71ED7 /* Assets.xcassets */,
 				81B39E441FBC291900F71ED7 /* LaunchScreen.storyboard */,
@@ -165,6 +171,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				812BD1221FBC2F2300A06688 /* json.txt in Resources */,
+				81CE857B1FC27A7000321B3F /* StoryboardC.storyboard in Resources */,
+				81CE85791FC27A6100321B3F /* StoryboardB.storyboard in Resources */,
 				81B39E461FBC291900F71ED7 /* LaunchScreen.storyboard in Resources */,
 				81B39E431FBC291900F71ED7 /* Assets.xcassets in Resources */,
 				81B39E3E1FBC291900F71ED7 /* Main.storyboard in Resources */,
