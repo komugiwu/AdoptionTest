@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemoViewController: UIViewController, UITextViewDelegate {
+class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate{
 
     //MARK: Properties
     @IBOutlet weak var memoTextView: UITextView!
@@ -19,9 +19,9 @@ class MemoViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        memoTextView.text = setMemo()
+        //memoTextView.text = setMemo()
         memoTextView.delegate = self
-        MemoViewController().setWebView()
+        //MemoViewController().setWebView()
     }
     
     //MARK: Memo related
@@ -34,6 +34,25 @@ class MemoViewController: UIViewController, UITextViewDelegate {
         else {
             return "Please memo something"
         }
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.endEditing(true)
+        }
+    }
+    /*
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        memoTextView.resignFirstResponder()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        memoTextView.resignFirstResponder()
+    }
+    */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     //MARK: Web related

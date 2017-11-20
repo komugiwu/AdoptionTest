@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Memo View Controller-->
         <scene sceneID="2fn-te-v93">
             <objects>
-                <viewController id="Ii1-5X-5sR" sceneMemberID="viewController">
+                <viewController id="Ii1-5X-5sR" customClass="MemoViewController" customModule="AdoptionTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eq4-KB-cuR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -29,7 +29,10 @@
                                         </constraints>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Ii1-5X-5sR" id="fZe-34-Ieo"/>
+                                        </connections>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqJ-hH-rRf">
                                         <rect key="frame" x="5" y="5" width="48" height="13"/>
@@ -63,13 +66,21 @@
                                     <constraint firstItem="Wbk-It-rfP" firstAttribute="top" secondItem="sqJ-hH-rRf" secondAttribute="bottom" constant="5" id="zCh-8C-5ew"/>
                                 </constraints>
                             </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0s-dm-WWi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="475"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2bg-KZ-ZOG" secondAttribute="trailing" id="71j-HK-xp2"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" constant="475" id="7mK-aC-d6B"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="leading" secondItem="eq4-KB-cuR" secondAttribute="leading" id="ADS-D5-YwB"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" id="TEu-0G-qKQ"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="bottom" secondItem="U9H-UZ-PcN" secondAttribute="bottom" id="VMO-2E-Rey"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="leading" secondItem="U9H-UZ-PcN" secondAttribute="leading" id="dia-kX-jzW"/>
+                            <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="d0s-dm-WWi" secondAttribute="bottom" id="hN4-MG-IDF"/>
+                            <constraint firstAttribute="trailing" secondItem="d0s-dm-WWi" secondAttribute="trailing" id="qj6-gC-JUs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U9H-UZ-PcN"/>
                     </view>
@@ -95,6 +106,10 @@
                             </view>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="memoTextView" destination="Wbk-It-rfP" id="dRX-vC-rZN"/>
+                        <outlet property="webView" destination="d0s-dm-WWi" id="Taf-J2-y6f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twG-9w-SeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DaB-Y3-w1o" userLabel="Exit" sceneMemberID="exit"/>
