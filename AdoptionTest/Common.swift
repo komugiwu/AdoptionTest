@@ -53,6 +53,13 @@ class Common {
  
         let image = UIImage.init(data: data)!
         imageView?.image = image
+        
+        print("************* ImageURL ******************")
+        print("ImageView URL : \(String(describing: string))")
+        print("ImageView Data : \(data)")
+        print("ImageView image : \(String(describing: imageView?.image))")
+        print("*****************************************")
+
     }
     
     func stringToURL(string: String?) -> URL? {
@@ -64,5 +71,10 @@ class Common {
             return
         }
         label?.text = string
+        
+        print("************** Label ********************")
+        print("String: \(String(describing: string))")
+        print("Label: \(String(describing: label?.text))")
+        print("*****************************************")
     }
 }
