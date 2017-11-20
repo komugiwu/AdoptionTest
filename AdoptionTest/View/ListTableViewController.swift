@@ -12,7 +12,7 @@ class ListTableViewController: UITableViewController {
     
     //MARK: Properties
     var seletedSection: Int?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Common().setJsonDatas()
@@ -46,24 +46,17 @@ class ListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         seletedSection = indexPath.section
+        self.performSegue(withIdentifier: "segue_to_memoVC", sender: indexPath)
+        if let selectedSection = seletedSection {
+            MemoViewController.id = Common.jsonDatas![selectedSection]["id"] as? Int16
+            MemoViewController.url = Common().stringToURL(string: Common.jsonDatas![selectedSection]["url"] as? String)
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ListTableViewCell.height
     }
-    
-    //MARK: Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let jsonData = Common.jsonDatas
-        let nextPage = MemoViewController.self
-
-        if let selectedSection = seletedSection {
-            nextPage.id = jsonData![selectedSection]["id"] as? Int16
-            nextPage.url = Common().stringToURL(string: Common.jsonDatas![selectedSection]["url"] as? String)
-        }
-    }
-    
+ 
     //MARK: Activies
     
     @IBAction func unwindToListVC(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {

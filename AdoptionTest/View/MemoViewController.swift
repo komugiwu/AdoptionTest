@@ -19,47 +19,42 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        memoTextView.text = setMemo()
-        memoTextView.delegate = self
-        MemoViewController().setWebView()
+        
+        self.setMemo(textView: memoTextView)
+        self.setWebView()
     }
     
-    //MARK: Memo related
-    func setMemo() -> String {
-        let memoAtFirst: String? = Memo().showMemo(id: MemoViewController.id!)
+    //MARK: Memo and Web Setting
+    
+    func setMemo( textView: UITextView) {
         
-        if memoAtFirst != nil {
-            return memoAtFirst!
+        let id = MemoViewController.id
+        var memoAtFirst: String?
+        if let id = id {
+            print(id)
+            memoAtFirst = Memo().showMemo(id: id)
         }
-        else {
-            return "Please memo something"
-        }
+        memoTextView.text = memoAtFirst
+        memoTextView.delegate = self
     }
+    
+    func setWebView() {
+        webView.delegate = self as? UIWebViewDelegate
+        let request = URLRequest.init(url: MemoViewController.url!)
+        self.webView.loadRequest(request)
+    }
+    
+    //MARK: TextField delegate
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         UIView.animate(withDuration: 0.3) {
             self.view.endEditing(true)
         }
     }
-    /*
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        memoTextView.resignFirstResponder()
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        memoTextView.resignFirstResponder()
-    }
-    */
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    //MARK: Web related
-    func setWebView() {
-        webView.delegate = self as? UIWebViewDelegate
-        let request = URLRequest.init(url: MemoViewController.url!)
-        self.webView.loadRequest(request)
     }
     
     //MARK: Activities
