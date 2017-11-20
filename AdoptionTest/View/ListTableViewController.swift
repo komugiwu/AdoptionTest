@@ -37,11 +37,21 @@ class ListTableViewController: UITableViewController {
         return cell
     }
 
+    /*
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name:"Futura", size: 17)
         header.textLabel?.frame = CGRect.init(x: 5, y: 0, width: tableView.bounds.size.width, height: 30)
         header.textLabel?.text = Common.jsonDatas![section]["name"] as? String
+    }
+    */
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont(name:"Futura", size: 17)
+        header.textLabel?.frame = CGRect.init(x: 5, y: 0, width: tableView.bounds.size.width, height: 30)
+        header.textLabel?.text = Common.jsonDatas![section]["name"] as? String
+        return header
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,6 +60,7 @@ class ListTableViewController: UITableViewController {
         if let selectedSection = seletedSection {
             MemoViewController.id = Common.jsonDatas![selectedSection]["id"] as? Int16
             MemoViewController.url = Common().stringToURL(string: Common.jsonDatas![selectedSection]["url"] as? String)
+            MemoViewController.name = Common.jsonDatas![selectedSection]["name"] as? String
         }
     }
 

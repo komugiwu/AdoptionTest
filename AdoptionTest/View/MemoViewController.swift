@@ -15,6 +15,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var webView: UIWebView!
     static var id: Int16?
     static var url: URL?
+    static var name: String?
     var memoContext :String?
     
     override func viewDidLoad() {
@@ -22,6 +23,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         self.setMemo(textView: memoTextView)
         self.setWebView()
+        self.setNavigationItem()
     }
     
     //MARK: Memo and Web Setting
@@ -42,6 +44,12 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         webView.delegate = self as? UIWebViewDelegate
         let request = URLRequest.init(url: MemoViewController.url!)
         self.webView.loadRequest(request)
+    }
+    
+    func setNavigationItem() {
+        if let name = MemoViewController.name {
+            self.navigationItem.title = name
+        }
     }
     
     //MARK: TextField delegate
