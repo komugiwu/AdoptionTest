@@ -53,8 +53,5 @@ class MemoViewController: UIViewController, UITextViewDelegate {
         Memo().addMemo(id: MemoViewController.id!, memo: memoContext!)
     }
     
-    @IBAction func backLastPageButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
     
 }

@@ -84,7 +84,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="GVR-M1-Q93" kind="unwind" unwindAction="unwindFor:towardsViewController:" id="zPe-WQ-2SD"/>
+                                            <segue destination="GVR-M1-Q93" kind="unwind" unwindAction="unwindToVCFor:towardsViewController:" id="FRT-9F-R2i"/>
                                         </connections>
                                     </button>
                                 </subviews>

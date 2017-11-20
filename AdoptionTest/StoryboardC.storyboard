@@ -73,7 +73,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="DaB-Y3-w1o" kind="unwind" unwindAction="unwindFor:towardsViewController:" id="GPT-ij-gfG"/>
+                                            <segue destination="DaB-Y3-w1o" kind="unwind" unwindAction="unwindToListVCFor:towardsViewController:" id="Asm-EN-R6K"/>
                                         </connections>
                                     </button>
                                 </subviews>

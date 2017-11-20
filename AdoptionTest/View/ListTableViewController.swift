@@ -53,15 +53,15 @@ class ListTableViewController: UITableViewController {
     }
     
     //MARK: Segue
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextPage = MemoViewController.self
         nextPage.id = Common.jsonDatas![seletedSection!]["id"] as? Int16
         nextPage.url = Common().stringToURL(string: Common.jsonDatas![seletedSection!]["url"] as? String)
-        
     }
     
     //MARK: Activies
-    @IBAction override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+    @IBAction func unwindToListVC(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
         if unwindSegue.identifier == "segue_to_memoVC" {
             print("unwind for 'segue_to_memoVC'")
         }
