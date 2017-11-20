@@ -33,7 +33,7 @@ class ListTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else {
             fatalError("The dequeued cell is not an instance of ListTableViewCell")
         }
-        ListTableViewCell().setCells(indexPath: indexPath)
+        cell.setCells(indexPath: indexPath)
         return cell
     }
 

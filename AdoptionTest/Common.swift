@@ -38,10 +38,6 @@ class Common {
     //Mark : Set cell related
     
     func imageFromStringURL(imageView: UIImageView?, string: String?) {
-        guard imageView == imageView else {
-            return
-        }
-        
         var data: Data
         do {
             let url = Common().stringToURL(string: string)
@@ -51,8 +47,11 @@ class Common {
             fatalError("Failed to load image from URL")
         }
  
+        guard let imgView = imageView else {
+            return
+        }
         let image = UIImage.init(data: data)!
-        imageView?.image = image
+        imgView.image = image
     }
     
     func stringToURL(string: String?) -> URL? {

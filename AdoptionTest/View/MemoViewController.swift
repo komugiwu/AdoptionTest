@@ -19,9 +19,9 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //memoTextView.text = setMemo()
+        memoTextView.text = setMemo()
         memoTextView.delegate = self
-        //MemoViewController().setWebView()
+        MemoViewController().setWebView()
     }
     
     //MARK: Memo related

@@ -37,6 +37,7 @@ class ListTableViewCell: UITableViewCell {
         let nameString = jsonData![indexPath.section]["hiragana"] as? String
         let prefectureArray = jsonData![indexPath.section]["prefecture"] as? NSArray
         
+        print("urlImageVieww ; \(urlImageView)")
         Common().imageFromStringURL(imageView: urlImageView, string: imageString)
         Common().setValueToLabel(label: nameLabel, string: nameString)
         Common().setValueToLabel(label: prefectureLabel, string: prefectureArray?[indexPath.row] as? String)
