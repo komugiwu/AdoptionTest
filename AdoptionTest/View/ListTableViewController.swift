@@ -55,9 +55,13 @@ class ListTableViewController: UITableViewController {
     //MARK: Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let jsonData = Common.jsonDatas
         let nextPage = MemoViewController.self
-        nextPage.id = Common.jsonDatas![seletedSection!]["id"] as? Int16
-        nextPage.url = Common().stringToURL(string: Common.jsonDatas![seletedSection!]["url"] as? String)
+
+        if let selectedSection = seletedSection {
+            nextPage.id = jsonData![selectedSection]["id"] as? Int16
+            nextPage.url = Common().stringToURL(string: Common.jsonDatas![selectedSection]["url"] as? String)
+        }
     }
     
     //MARK: Activies
