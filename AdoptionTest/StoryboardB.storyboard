@@ -32,8 +32,8 @@
                                                 <constraint firstAttribute="width" constant="55" id="Xfh-nw-jEg"/>
                                             </constraints>
                                         </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="J8c-9j-Fbe">
-                                            <rect key="frame" x="68" y="13" width="80" height="38.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="J8c-9j-Fbe">
+                                            <rect key="frame" x="70" y="14.5" width="80" height="35.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhT-JE-pM0">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="10"/>
@@ -42,7 +42,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="prefecture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mY9-Y6-oep">
-                                                    <rect key="frame" x="0.0" y="18" width="80" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="15" width="80" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -52,8 +52,8 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="IzU-sg-0IK" firstAttribute="top" secondItem="a1l-eK-wJc" secondAttribute="top" constant="5" id="3kC-J0-J4U"/>
+                                        <constraint firstItem="J8c-9j-Fbe" firstAttribute="leading" secondItem="IzU-sg-0IK" secondAttribute="trailing" constant="10" id="84k-Cy-cMV"/>
                                         <constraint firstItem="J8c-9j-Fbe" firstAttribute="centerY" secondItem="IzU-sg-0IK" secondAttribute="centerY" id="TZd-3Y-cM8"/>
-                                        <constraint firstItem="J8c-9j-Fbe" firstAttribute="leading" secondItem="IzU-sg-0IK" secondAttribute="trailing" constant="8" symbolic="YES" id="akQ-ZK-IE3"/>
                                         <constraint firstAttribute="bottom" secondItem="IzU-sg-0IK" secondAttribute="bottom" constant="5" id="deO-3m-vdg"/>
                                         <constraint firstItem="IzU-sg-0IK" firstAttribute="leading" secondItem="a1l-eK-wJc" secondAttribute="leading" constant="5" id="e4b-3l-q8g"/>
                                     </constraints>
@@ -78,7 +78,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmQ-bx-FOD">
-                                        <rect key="frame" x="5" y="5" width="30" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="←">

@@ -31,13 +31,14 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 
     //MARK: Memo and Web Setting
     
-    func setMemo( textView: UITextView) {
+    func setMemo(textView: UITextView) {
         
         let id = MemoViewController.id
         if let id = id {
             print(id)
             memoAtFirst = MemoCoreData().showMemo(id: id)
         }
+        
         memoTextView.text = memoAtFirst
         memoTextView.delegate = self
     }
@@ -101,5 +102,6 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         else {
             MemoCoreData().addMemo(id: MemoViewController.id, memo: memoContext)
         }
+    memoTextView.resignFirstResponder()
     }
 }

@@ -12,6 +12,7 @@ import CoreData
 class Common {
     
     //Properties
+    
     static var jsonDatas: Array<Dictionary<String, AnyObject>>?
     
     //Json related
@@ -54,15 +55,17 @@ class Common {
         imgView.image = image
     }
     
-    func stringToURL(string: String?) -> URL? {
-        return URL(string: string!)
-    }
-    
     func setValueToLabel(label: UILabel?, string: String?) {
         guard label == label else {
             return
         }
         label?.text = string
+    }
+    
+    //MARK : Type transform methods
+    
+    func stringToURL(string: String?) -> URL? {
+        return URL(string: string!)
     }
     
     func stringToInt16(string: String?) -> Int16? {
