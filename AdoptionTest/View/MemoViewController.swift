@@ -24,8 +24,9 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         self.setMemo(textView: memoTextView)
         self.setWebView()
         self.setNavigationItem()
+        self.setKeyboard()
     }
-    
+
     //MARK: Memo and Web Setting
     
     func setMemo( textView: UITextView) {
@@ -64,16 +65,27 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         textField.resignFirstResponder()
         return true
     }
-    
-    //MARK: Activities
-    @IBAction func saveMemoButton(_ sender: UIButton) {
-        let memoContext = memoTextView.text
-        
-        guard memoContext == nil else {
-            return
-        }
-        Memo().addMemo(id: MemoViewController.id!, memo: memoContext!)
+
+    //MARK: Keyboard setting
+
+    func setKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame: CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            let duration: Double = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! Double
+            
+            UIView.animate(withDuration: duration, animations: { () -> Void in
+                var frame = self.view.frame
+                frame.origin.y = keyboardFrame.minY - self.view.frame.height
+                self.view.frame = frame
+            })
+        }
+    }
 }
