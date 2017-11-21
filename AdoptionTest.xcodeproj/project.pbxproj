@@ -22,6 +22,7 @@
 		81B39E461FBC291900F71ED7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81B39E441FBC291900F71ED7 /* LaunchScreen.storyboard */; };
 		81CE85791FC27A6100321B3F /* StoryboardB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81CE85781FC27A6100321B3F /* StoryboardB.storyboard */; };
 		81CE857B1FC27A7000321B3F /* StoryboardC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81CE857A1FC27A7000321B3F /* StoryboardC.storyboard */; };
+		81CE858D1FC421E200321B3F /* MemoCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE858C1FC421E200321B3F /* MemoCoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		81B39E571FBC2BDD00F71ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		81CE85781FC27A6100321B3F /* StoryboardB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardB.storyboard; sourceTree = "<group>"; };
 		81CE857A1FC27A7000321B3F /* StoryboardC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardC.storyboard; sourceTree = "<group>"; };
+		81CE858C1FC421E200321B3F /* MemoCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				812BD1271FBC3E8100A06688 /* Memo.swift */,
 				812BD1281FBC3E8100A06688 /* Memo+CoreDataProperties.swift */,
+				81CE858C1FC421E200321B3F /* MemoCoreData.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				812BD1191FBC2D2D00A06688 /* ListTableViewController.swift in Sources */,
 				812BD11F1FBC2D7F00A06688 /* Common.swift in Sources */,
 				81B39E3B1FBC291900F71ED7 /* ViewController.swift in Sources */,
+				81CE858D1FC421E200321B3F /* MemoCoreData.swift in Sources */,
 				81B39E391FBC291900F71ED7 /* AppDelegate.swift in Sources */,
 				812BD1291FBC3E8100A06688 /* Memo.swift in Sources */,
 				812BD11B1FBC2D4300A06688 /* MemoViewController.swift in Sources */,

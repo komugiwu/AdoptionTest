@@ -11,6 +11,7 @@ import UIKit
 class ListTableViewController: UITableViewController {
     
     //MARK: Properties
+    
     var seletedSection: Int?
     
     override func viewDidLoad() {
@@ -28,7 +29,6 @@ class ListTableViewController: UITableViewController {
         return (Common.jsonDatas?[section]["prefecture"]!.count)!
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else {
             fatalError("The dequeued cell is not an instance of ListTableViewCell")
@@ -44,22 +44,13 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return Common.jsonDatas![section]["name"] as? String
     }
-    
-    /*
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name:"Futura", size: 17)
-        header.textLabel?.frame = CGRect.init(x: 5, y: 0, width: tableView.bounds.size.width, height: 30)
-        header.textLabel?.text = Common.jsonDatas![section]["name"] as? String
-        return header
-    }
-     */
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         seletedSection = indexPath.section
         self.performSegue(withIdentifier: "segue_to_memoVC", sender: indexPath)
         if let selectedSection = seletedSection {
-            MemoViewController.id = Common.jsonDatas![selectedSection]["id"] as? Int16
+            let idValue = Common().stringToInt16(string: Common.jsonDatas![selectedSection]["id"] as? String)
+            MemoViewController.id = idValue
             MemoViewController.url = Common().stringToURL(string: Common.jsonDatas![selectedSection]["url"] as? String)
             MemoViewController.name = Common.jsonDatas![selectedSection]["name"] as? String
         }

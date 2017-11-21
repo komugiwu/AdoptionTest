@@ -17,6 +17,8 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     static var url: URL?
     static var name: String?
     var memoContext :String?
+    var memoCoreData : Memo?
+    var memoAtFirst: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +34,9 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     func setMemo( textView: UITextView) {
         
         let id = MemoViewController.id
-        var memoAtFirst: String?
         if let id = id {
             print(id)
-            memoAtFirst = Memo().showMemo(id: id)
+            memoAtFirst = MemoCoreData().showMemo(id: id)
         }
         memoTextView.text = memoAtFirst
         memoTextView.delegate = self
@@ -86,6 +87,19 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 frame.origin.y = keyboardFrame.minY - self.view.frame.height
                 self.view.frame = frame
             })
+        }
+    }
+
+    @IBAction func saveMemoButton(_ sender: UIButton) {
+        let memoContext = memoTextView.text
+        guard memoContext != nil else {
+            return
+        }
+        if memoAtFirst != nil {
+            MemoCoreData().updateMemoMemo(id: MemoViewController.id!, memo: memoContext!)
+        }
+        else {
+            MemoCoreData().addMemo(id: MemoViewController.id, memo: memoContext)
         }
     }
 }

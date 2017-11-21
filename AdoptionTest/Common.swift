@@ -35,7 +35,7 @@ class Common {
         }
     }
     
-    //Mark : Set cell related
+    //Mark : List cell setting
     
     func imageFromStringURL(imageView: UIImageView?, string: String?) {
         var data: Data
@@ -63,5 +63,13 @@ class Common {
             return
         }
         label?.text = string
+    }
+    
+    func stringToInt16(string: String?) -> Int16? {
+        guard string != nil else {
+            return nil
+        }
+        let intValue = Int16(string!)
+        return intValue
     }
 }
