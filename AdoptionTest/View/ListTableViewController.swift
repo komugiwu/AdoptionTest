@@ -28,7 +28,7 @@ class ListTableViewController: UITableViewController {
         return (Common.jsonDatas?[section]["prefecture"]!.count)!
     }
 
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else {
             fatalError("The dequeued cell is not an instance of ListTableViewCell")
@@ -37,15 +37,15 @@ class ListTableViewController: UITableViewController {
         return cell
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name:"Futura", size: 17)
-        header.textLabel?.frame = CGRect.init(x: 5, y: 0, width: tableView.bounds.size.width, height: 30)
-        header.textLabel?.text = Common.jsonDatas![section]["name"] as? String
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
-    */
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Common.jsonDatas![section]["name"] as? String
+    }
+    
+    /*
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name:"Futura", size: 17)
@@ -53,7 +53,8 @@ class ListTableViewController: UITableViewController {
         header.textLabel?.text = Common.jsonDatas![section]["name"] as? String
         return header
     }
-    
+     */
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         seletedSection = indexPath.section
         self.performSegue(withIdentifier: "segue_to_memoVC", sender: indexPath)
