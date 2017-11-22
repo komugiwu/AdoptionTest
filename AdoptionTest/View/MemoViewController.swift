@@ -17,7 +17,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     static var url: URL?
     static var name: String?
     var memoContext :String?
-    var memoCoreData : Memo?
+//    var memoCoreData : Memo?
     var memoAtFirst: String?
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         let id = MemoViewController.id
         if let id = id {
             print(id)
-            memoAtFirst = MemoCoreData().showMemo(id: id)
+            memoAtFirst = JSONCoreData().showMemo(id: id)
         }
         
         memoTextView.text = memoAtFirst
@@ -97,10 +97,10 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             return
         }
         if memoAtFirst != nil {
-            MemoCoreData().updateMemoMemo(id: MemoViewController.id!, memo: memoContext!)
+            JSONCoreData().updateMemoMemo(id: MemoViewController.id!, memo: memoContext!)
         }
         else {
-            MemoCoreData().addMemo(id: MemoViewController.id, memo: memoContext)
+            JSONCoreData().addMemo(id: MemoViewController.id, memo: memoContext)
         }
     memoTextView.resignFirstResponder()
     }

@@ -17,6 +17,7 @@ class ListTableViewCell: UITableViewCell {
     
     static let identifier = "ListCell"
     static let height: CGFloat = 65.0
+    static let headerHeight: CGFloat = 30.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,15 +32,15 @@ class ListTableViewCell: UITableViewCell {
     //Set cell
     func setCells(indexPath: IndexPath) {
         
-        let jsonData = Common.jsonDatas
+        let jsonData = Common.jsonDatasFromCoreData
         
-        let imageString = jsonData![indexPath.section]["image"] as? String
-        let nameString = jsonData![indexPath.section]["hiragana"] as? String
-        let prefectureArray = jsonData![indexPath.section]["prefecture"] as? NSArray
+        let imageString = jsonData![indexPath.section].image
+        let nameString = jsonData![indexPath.section].hiragana
+        let prefectureArray = jsonData![indexPath.section].prefecture
         
         print("urlImageVieww ; \(urlImageView)")
         Common().imageFromStringURL(imageView: urlImageView, string: imageString)
         nameLabel.text = nameString
-        prefectureLabel.text = prefectureArray?[indexPath.row] as? String
+        prefectureLabel.text = prefectureArray?[indexPath.row]
     }
 }

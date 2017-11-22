@@ -16,17 +16,16 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Common().setJsonDatas()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return (Common.jsonDatas?.count)!
+        return Common.jsonDatasFromCoreData!.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (Common.jsonDatas?[section]["prefecture"]!.count)!
+        return Common.jsonDatasFromCoreData![section].prefecture!.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,21 +37,20 @@ class ListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return ListTableViewCell.headerHeight
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Common.jsonDatas![section]["name"] as? String
+        return Common.jsonDatasFromCoreData![section].name
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         seletedSection = indexPath.section
-        self.performSegue(withIdentifier: "segue_to_memoVC", sender: indexPath)
+        self.performSegue(withIdentifier: Common.SegueName.segueToMemoVC.rawValue, sender: indexPath)
         if let selectedSection = seletedSection {
-            let idValue = Common().stringToInt16(string: Common.jsonDatas![selectedSection]["id"] as? String)
-            MemoViewController.id = idValue
-            MemoViewController.url = Common().stringToURL(string: Common.jsonDatas![selectedSection]["url"] as? String)
-            MemoViewController.name = Common.jsonDatas![selectedSection]["name"] as? String
+            MemoViewController.id = Common.jsonDatasFromCoreData![selectedSection].id
+            MemoViewController.url = Common().stringToURL(string: Common.jsonDatasFromCoreData![selectedSection].url)
+            MemoViewController.name = Common.jsonDatasFromCoreData![selectedSection].name
         }
     }
 
@@ -63,7 +61,7 @@ class ListTableViewController: UITableViewController {
     //MARK: Activies
     
     @IBAction func unwindToListVC(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
-        if unwindSegue.identifier == "segue_to_memoVC" {
+        if unwindSegue.identifier == Common.SegueName.segueToMemoVC.rawValue {
             print("unwind for 'segue_to_memoVC'")
         }
     }

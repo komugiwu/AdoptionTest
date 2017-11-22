@@ -14,6 +14,8 @@ class Common {
     //Properties
     
     static var jsonDatas: Array<Dictionary<String, AnyObject>>?
+    static var jsonDatasFromCoreData: Array<JsonDatas>?
+    
     enum JsonKeys: String {
         case regions = "regions"
         case id = "id"
@@ -24,6 +26,12 @@ class Common {
         case prefecture = "prefecture"
     }
     
+    enum SegueName: String {
+        case segueToListVC = "segue_vc_to_listvc"
+        case segueToMemoVC = "segue_to_memoVC"
+    }
+    
+
     //Json related
     
     func setJsonDatas() {
@@ -37,14 +45,14 @@ class Common {
         do {
             let data = try Data.init(contentsOf: url!)
             let jsonObjects = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary<String, Array<Dictionary<String, AnyObject>>>
-            print(jsonObjects ?? "nil")
-            Common.jsonDatas = jsonObjects?["regions"]
+            //print(jsonObjects ?? "nil")
+            Common.jsonDatas = jsonObjects?[JsonKeys.regions.rawValue]
         }
         catch {
             print(error.localizedDescription)
         }
     }
-    
+
     //Mark : List cell setting
     
     func imageFromStringURL(imageView: UIImageView?, string: String?) {
