@@ -1,0 +1,11 @@
+
+Revise 
+
+* Storyboard : naming 
+* Storyboard : List image
+* Storyboard : 畫面偏掉
+* JSON data : insert to Core data
+* JSON data : set when page 1
+* List : dispatch global
+* List : label assign function
+* Segue: unwind segue function
