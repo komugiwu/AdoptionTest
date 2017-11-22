@@ -39,7 +39,7 @@ class ListTableViewCell: UITableViewCell {
         
         print("urlImageVieww ; \(urlImageView)")
         Common().imageFromStringURL(imageView: urlImageView, string: imageString)
-        Common().setValueToLabel(label: nameLabel, string: nameString)
-        Common().setValueToLabel(label: prefectureLabel, string: prefectureArray?[indexPath.row] as? String)
+        nameLabel.text = nameString
+        prefectureLabel.text = prefectureArray?[indexPath.row] as? String
     }
 }

@@ -14,6 +14,15 @@ class Common {
     //Properties
     
     static var jsonDatas: Array<Dictionary<String, AnyObject>>?
+    enum JsonKeys: String {
+        case regions = "regions"
+        case id = "id"
+        case name = "name"
+        case url = "url"
+        case image = "image"
+        case hiragana = "hiragana"
+        case prefecture = "prefecture"
+    }
     
     //Json related
     
@@ -53,13 +62,6 @@ class Common {
         }
         let image = UIImage.init(data: data)!
         imgView.image = image
-    }
-    
-    func setValueToLabel(label: UILabel?, string: String?) {
-        guard label == label else {
-            return
-        }
-        label?.text = string
     }
     
     //MARK : Type transform methods

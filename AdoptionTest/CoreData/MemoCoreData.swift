@@ -12,7 +12,7 @@ import CoreData
 class MemoCoreData {
     public static let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    //MARK : - Memo function
+    //MARK : Functions
     
     func addMemo(id: Int16?, memo: String?) {
         guard id != nil && memo != nil else {
