@@ -15,7 +15,7 @@ class JSONCoreData {
     
     //MARK : Set JSON datas
     
-    func setDatasToCoreData() {
+    func setDatasToCoreData(oldMemo: [Int16: String]?) {
         
         if let datas = Common.jsonDatas {
             for data in datas {
@@ -28,6 +28,13 @@ class JSONCoreData {
                 DataContext.prefecture =  data[Common.JsonKeys.prefecture.rawValue] as? Array
                 DataContext.id = Common().stringToInt16(string: data[Common.JsonKeys.id.rawValue] as? String)!
                 
+                if let oldMemo = oldMemo {
+                    for memo in oldMemo {
+                        if memo.key == DataContext.id {
+                            DataContext.memo = memo.value
+                        }
+                    }
+                }
                 do {
                     try JSONCoreData.moc.save()
                 }
@@ -50,24 +57,34 @@ class JSONCoreData {
         return nil
     }
     
-    /*
+    
     func cleanUpCoreData() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
         do {
-            let results = try moc.executeFetchRequest(request) as! [JsonDatas]
+            let results = try JSONCoreData.moc.fetch(request) as! [JsonDatas]
             for result in results {
-                moc.deleteObject(result)
+                JSONCoreData.moc.delete(result)
             }
             do {
-                try moc.save()
-            }catch{
+                try JSONCoreData.moc.save()
+            }
+            catch {
                 fatalError("Failure to save context: \(error)")
             }
-        }catch{
+        }
+        catch {
             fatalError("Failed to fetch data: \(error)")
         }
     }
- */
+    
+    func setDatas() {
+        let oldDatas = JSONCoreData().getDatasFromCoreData()
+        let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
+        JSONCoreData().cleanUpCoreData()
+        Common().setJsonDatas()
+        JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+        Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
+    }
     
     //MARK : Memo functions
     
@@ -125,4 +142,17 @@ class JSONCoreData {
             fatalError("Failed to fetch data: \(error)")
         }
      }
+
+    func getOldMemo(jsonDatas: Array<JsonDatas>?) -> [Int16: String]? {
+        
+        if jsonDatas == nil {
+            return nil
+        }
+
+        var memoDatas: [Int16: String] = [:]
+        for data in jsonDatas! {
+            memoDatas[data.id] = data.memo
+        }
+        return memoDatas
+    }
 }

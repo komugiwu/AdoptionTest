@@ -12,9 +12,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Common().setJsonDatas()
-        JSONCoreData().setDatasToCoreData()
-        Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
+        JSONCoreData().setDatas()
     }
     
     //MARK: Activies

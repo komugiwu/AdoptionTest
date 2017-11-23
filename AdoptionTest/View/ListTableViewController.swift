@@ -21,15 +21,10 @@ class ListTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        print("***********************************")
-        print(Common.jsonDatasFromCoreData!.count)
         return Common.jsonDatasFromCoreData!.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Common.jsonDatasFromCoreData![section].prefecture == nil {
-            return 0
-        }
         return Common.jsonDatasFromCoreData![section].prefecture!.count
     }
 
