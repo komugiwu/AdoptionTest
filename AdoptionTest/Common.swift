@@ -35,6 +35,9 @@ class Common {
     //Json related
     
     func setJsonDatas() {
+        if Common.jsonDatas != nil {
+            return
+        }
         
         guard Common.jsonDatas == nil else {
             return

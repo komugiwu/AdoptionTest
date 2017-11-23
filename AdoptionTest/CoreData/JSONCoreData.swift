@@ -50,6 +50,25 @@ class JSONCoreData {
         return nil
     }
     
+    /*
+    func cleanUpCoreData() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
+        do {
+            let results = try moc.executeFetchRequest(request) as! [JsonDatas]
+            for result in results {
+                moc.deleteObject(result)
+            }
+            do {
+                try moc.save()
+            }catch{
+                fatalError("Failure to save context: \(error)")
+            }
+        }catch{
+            fatalError("Failed to fetch data: \(error)")
+        }
+    }
+ */
+    
     //MARK : Memo functions
     
     func addMemo(id: Int16?, memo: String?) {

@@ -15,7 +15,6 @@ class ViewController: UIViewController {
         Common().setJsonDatas()
         JSONCoreData().setDatasToCoreData()
         Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
-        print(Common.jsonDatasFromCoreData![5].prefecture!.count)
     }
     
     //MARK: Activies
