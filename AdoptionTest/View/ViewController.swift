@@ -12,7 +12,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        JSONCoreData().setDatas()
+        DispatchQueue.global().async {
+            JSONCoreData().setDatas()
+        }
     }
     
     //MARK: Activies

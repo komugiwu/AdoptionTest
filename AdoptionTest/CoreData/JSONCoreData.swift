@@ -13,6 +13,21 @@ class JSONCoreData {
     static let entityName = "JsonDatas"
     public static let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    /*
+    lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<JsonDatas> in
+        let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+        let fetchRequest: NSFetchRequest<JsonDatas> = JsonDatas.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: context,
+                                                                  sectionNameKeyPath: "name",
+                                                                  cacheName: nil)
+        fetchedResultsController.delegate = self as? NSFetchedResultsControllerDelegate
+        return fetchedResultsController
+    }()
+    */
+    
     //MARK : Set JSON datas
     
     func setDatasToCoreData(oldMemo: [Int16: String]?) {
@@ -78,15 +93,12 @@ class JSONCoreData {
     }
     
     func setDatas() {
-        let q = DispatchQueue.global()
-        q.async {
-            let oldDatas = JSONCoreData().getDatasFromCoreData()
-            let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
-            JSONCoreData().cleanUpCoreData()
-            Common().setJsonDatas()
-            JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
-            Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
-        }
+        let oldDatas = JSONCoreData().getDatasFromCoreData()
+        let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
+        JSONCoreData().cleanUpCoreData()
+        Common().setJsonDatas()
+        JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+        Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
     }
     
     //MARK : Memo functions
@@ -127,8 +139,8 @@ class JSONCoreData {
         return nil
     }
 
-     func updateMemoMemo(id: Int16, memo: String?) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Memo")
+     func updateMemoMemo(id: Int16?, memo: String?) {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
      
         do {
             let results = try JSONCoreData.moc.fetch(request) as! [JsonDatas]
