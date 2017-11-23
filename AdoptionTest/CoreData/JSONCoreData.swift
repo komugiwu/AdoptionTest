@@ -78,12 +78,15 @@ class JSONCoreData {
     }
     
     func setDatas() {
-        let oldDatas = JSONCoreData().getDatasFromCoreData()
-        let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
-        JSONCoreData().cleanUpCoreData()
-        Common().setJsonDatas()
-        JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
-        Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
+        let q = DispatchQueue.global()
+        q.async {
+            let oldDatas = JSONCoreData().getDatasFromCoreData()
+            let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
+            JSONCoreData().cleanUpCoreData()
+            Common().setJsonDatas()
+            JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+            Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
+        }
     }
     
     //MARK : Memo functions
