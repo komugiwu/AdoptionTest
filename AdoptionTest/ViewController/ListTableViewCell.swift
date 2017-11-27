@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ListTableViewCell: UITableViewCell {
 
@@ -30,17 +31,9 @@ class ListTableViewCell: UITableViewCell {
     }
 
     //Set cell
-    func setCells(indexPath: IndexPath) {
-        
-        let jsonData = Common.jsonDatasFromCoreData
-        
-        let imageString = jsonData![indexPath.section].image
-        let nameString = jsonData![indexPath.section].hiragana
-        let prefectureArray = jsonData![indexPath.section].prefecture
-        
-        print("urlImageVieww ; \(urlImageView)")
-        Common().imageFromStringURL(imageView: urlImageView, string: imageString)
-        nameLabel.text = nameString
-        prefectureLabel.text = prefectureArray?[indexPath.row]
+    func setCells(fetchedResultsController: NSFetchedResultsController<JsonDatas>, indexPath: IndexPath) {
+        Common().imageFromStringURL(imageView: urlImageView, string: fetchedResultsController.fetchedObjects![indexPath.section].image)
+        nameLabel.text = fetchedResultsController.fetchedObjects![indexPath.section].hiragana
+        prefectureLabel.text = fetchedResultsController.fetchedObjects![indexPath.section].prefecture?[indexPath.row]
     }
 }

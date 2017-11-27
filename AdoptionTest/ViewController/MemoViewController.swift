@@ -16,6 +16,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     static var id: Int16?
     static var url: URL?
     static var name: String?
+    var activityIndicator: UIActivityIndicatorView!
     var memoContext :String?
     var memoAtFirst: String?
     
@@ -26,8 +27,9 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         self.setWebView()
         self.setNavigationItem()
         self.setKeyboard()
+        setIndicatorView()
     }
-
+    
     //MARK: Memo and Web Setting
     
     func setMemo(textView: UITextView) {
@@ -44,8 +46,11 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func setWebView() {
         webView.delegate = self as? UIWebViewDelegate
+        setIndicatorView()
+        playIndicator()
         let request = URLRequest.init(url: MemoViewController.url!)
         self.webView.loadRequest(request)
+        stopIndicator()
     }
     
     func setNavigationItem() {
@@ -102,5 +107,26 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             JSONCoreData().addMemo(id: MemoViewController.id, memo: memoContext)
         }
     memoTextView.resignFirstResponder()
+    }
+    
+    //MARK: Activity Indicator related
+    
+    func setIndicatorView() {
+        self.activityIndicator = UIActivityIndicatorView()
+        self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:
+            UIActivityIndicatorViewStyle.gray)
+        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        self.activityIndicator.center = self.webView.center
+        webView.addSubview(self.activityIndicator)
+        }
+    
+    func playIndicator() {
+        self.activityIndicator.startAnimating()
+    }
+    
+    func stopIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

@@ -11,22 +11,7 @@ import CoreData
 
 class JSONCoreData {
     static let entityName = "JsonDatas"
-    public static let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    /*
-    lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<JsonDatas> in
-        let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-        let fetchRequest: NSFetchRequest<JsonDatas> = JsonDatas.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: context,
-                                                                  sectionNameKeyPath: "name",
-                                                                  cacheName: nil)
-        fetchedResultsController.delegate = self as? NSFetchedResultsControllerDelegate
-        return fetchedResultsController
-    }()
-    */
+    public static let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     //MARK : Set JSON datas
     
@@ -36,12 +21,12 @@ class JSONCoreData {
             for data in datas {
                 let DataContext = NSEntityDescription.insertNewObject(forEntityName: JSONCoreData.entityName, into: JSONCoreData.moc) as! JsonDatas
                 
-                DataContext.image = data[Common.JsonKeys.image.rawValue] as? String
-                DataContext.name = data[Common.JsonKeys.name.rawValue] as? String
-                DataContext.url = data[Common.JsonKeys.url.rawValue] as? String
-                DataContext.hiragana = data[Common.JsonKeys.hiragana.rawValue] as? String
-                DataContext.prefecture =  data[Common.JsonKeys.prefecture.rawValue] as? Array
-                DataContext.id = Common().stringToInt16(string: data[Common.JsonKeys.id.rawValue] as? String)!
+                DataContext.image = data[Common.JsonKeys.image] as? String
+                DataContext.name = data[Common.JsonKeys.name] as? String
+                DataContext.url = data[Common.JsonKeys.url] as? String
+                DataContext.hiragana = data[Common.JsonKeys.hiragana] as? String
+                DataContext.prefecture =  data[Common.JsonKeys.prefecture] as? Array
+                DataContext.id = Common().stringToInt16(string: data[Common.JsonKeys.id] as? String)!
                 
                 if let oldMemo = oldMemo {
                     for memo in oldMemo {
@@ -61,6 +46,7 @@ class JSONCoreData {
     }
     
     func getDatasFromCoreData() -> Array<JsonDatas>? {
+        
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
         
         do {
@@ -71,8 +57,7 @@ class JSONCoreData {
         }
         return nil
     }
-    
-    
+ 
     func cleanUpCoreData() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
         do {
@@ -98,7 +83,6 @@ class JSONCoreData {
         JSONCoreData().cleanUpCoreData()
         Common().setJsonDatas()
         JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
-        Common.jsonDatasFromCoreData = JSONCoreData().getDatasFromCoreData()
     }
     
     //MARK : Memo functions

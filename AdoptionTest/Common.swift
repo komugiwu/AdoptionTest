@@ -14,21 +14,20 @@ class Common {
     //Properties
     
     static var jsonDatas: Array<Dictionary<String, AnyObject>>?
-    static var jsonDatasFromCoreData: Array<JsonDatas>?
     
-    enum JsonKeys: String {
-        case regions = "regions"
-        case id = "id"
-        case name = "name"
-        case url = "url"
-        case image = "image"
-        case hiragana = "hiragana"
-        case prefecture = "prefecture"
+    struct JsonKeys {
+        static let regions = "regions"
+        static let id = "id"
+        static let name = "name"
+        static let url = "url"
+        static let image = "image"
+        static let hiragana = "hiragana"
+        static let prefecture = "prefecture"
     }
     
-    enum SegueName: String {
-        case segueToListVC = "segue_vc_to_listvc"
-        case segueToMemoVC = "segue_to_memoVC"
+    struct SegueName {
+        static let segueToListVC = "segue_vc_to_listvc"
+        static let segueToMemoVC = "segue_to_memoVC"
     }
     
 
@@ -49,7 +48,7 @@ class Common {
             let data = try Data.init(contentsOf: url!)
             let jsonObjects = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary<String, Array<Dictionary<String, AnyObject>>>
             //print(jsonObjects ?? "nil")
-            Common.jsonDatas = jsonObjects?[JsonKeys.regions.rawValue]
+            Common.jsonDatas = jsonObjects?[JsonKeys.regions]
         }
         catch {
             print(error.localizedDescription)
@@ -75,7 +74,7 @@ class Common {
         imgView.image = image
     }
     
-    //MARK : Type transform methods
+    //MARK : Others
     
     func stringToURL(string: String?) -> URL? {
         return URL(string: string!)
@@ -88,4 +87,32 @@ class Common {
         let intValue = Int16(string!)
         return intValue
     }
+    
+    /*
+    //MARK: Activity Indicator view
+   
+    func setIndicatorView(view: UIWebView) {
+        if Common.activityIndicator == nil {
+            Common.activityIndicator = UIActivityIndicatorView()
+        }
+        
+        Common.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:
+            UIActivityIndicatorViewStyle.gray)
+        Common.activityIndicator?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        Common.activityIndicator?.center = view.center
+        Common.activityIndicator?.hidesWhenStopped = true
+        view.addSubview(Common.activityIndicator!);
+
+        Common().playIndicator()
+    }
+    
+    func playIndicator() {
+        Common.activityIndicator?.startAnimating()
+    }
+    
+    func stopIndicator() {
+        Common.activityIndicator?.stopAnimating()
+        
+    }
+    */
 }

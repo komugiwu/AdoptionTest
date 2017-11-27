@@ -12,14 +12,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.global().async {
-            JSONCoreData().setDatas()
-        }
+        JSONCoreData().setDatas()
     }
     
     //MARK: Activies
     @IBAction func unwindToVC(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
-        if unwindSegue.identifier == Common.SegueName.segueToListVC.rawValue {
+        if unwindSegue.identifier == Common.SegueName.segueToListVC {
             print("unwind for 'segue_vc_to_listvc'")
         }
     }

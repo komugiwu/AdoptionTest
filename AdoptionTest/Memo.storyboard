@@ -85,12 +85,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" id="S0D-Wn-tUe"/>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="trailing" secondItem="U9H-UZ-PcN" secondAttribute="trailing" id="XKe-8A-27t"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="leading" secondItem="U9H-UZ-PcN" secondAttribute="leading" id="9IA-L2-p9V"/>
+                            <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="d0s-dm-WWi" secondAttribute="bottom" id="Cbj-uV-VPX"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" id="EBb-pf-lHH"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="leading" secondItem="2bg-KZ-ZOG" secondAttribute="leading" id="GSK-PR-eKG"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="trailing" secondItem="U9H-UZ-PcN" secondAttribute="trailing" id="H5J-8o-vBQ"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" id="ZyE-o9-LGz"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="leading" secondItem="U9H-UZ-PcN" secondAttribute="leading" id="czZ-cd-MMg"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="trailing" secondItem="U9H-UZ-PcN" secondAttribute="trailing" id="etL-Y3-qX1"/>
-                            <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="d0s-dm-WWi" secondAttribute="bottom" id="oZu-fG-GR6"/>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="leading" secondItem="U9H-UZ-PcN" secondAttribute="leading" id="t8A-4A-TK2"/>
+                            <constraint firstItem="d0s-dm-WWi" firstAttribute="trailing" secondItem="2bg-KZ-ZOG" secondAttribute="trailing" id="keZ-OQ-Dc1"/>
+                            <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="d0s-dm-WWi" secondAttribute="bottom" id="v7R-Gx-Alg"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="bottom" secondItem="U9H-UZ-PcN" secondAttribute="bottom" id="vGv-Fc-zL4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U9H-UZ-PcN"/>
