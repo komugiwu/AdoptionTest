@@ -14,6 +14,7 @@ class Common {
     //Properties
     
     static var jsonDatas: Array<Dictionary<String, AnyObject>>?
+    var internetReachability: Reachability!
     
     struct JsonKeys {
         static let regions = "regions"
@@ -64,7 +65,9 @@ class Common {
             try data = Data(contentsOf: url!)
         }
         catch {
-            fatalError("Failed to load image from URL")
+            print("failed to load image from URL")
+            return
+            //fatalError("Failed to load image from URL")
         }
  
         guard let imgView = imageView else {
@@ -73,6 +76,42 @@ class Common {
         let image = UIImage.init(data: data)!
         imgView.image = image
     }
+    
+    //MARK : Network related
+    
+    /*
+    func checkNetworkStatus(sender: Any) {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.reachabilityChanged, object: nil, queue: OperationQueue.main) { (NSNotification) -> Void in
+            let networksStatus: NetworkStatus = self.internetReachability.currentReachabilityStatus()
+            var status: String!
+            if networksStatus.rawValue == 0 {
+                status = "Disconnection"
+            }
+            else {
+                status = "Connection"
+            }
+            let alert = UIAlertController.init(title: "Network Status", message: status, preferredStyle: .alert)
+            let ok = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            (sender as AnyObject).present(alert, animated: true, completion: nil)
+        }
+        
+        self.internetReachability = Reachability.forInternetConnection();
+        self.internetReachability.startNotifier()
+ 
+    }
+    */
+    func checkNetworkStatus(sender: AnyObject) {
+        let reachability: Reachability = Reachability.forInternetConnection()
+        let networkStatus: Int = reachability.currentReachabilityStatus().rawValue
+        if networkStatus == 0 {
+            let alert = UIAlertController.init(title: "Network Status", message: "Disconnection", preferredStyle: .alert)
+            let ok = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            sender.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     //MARK : Others
     

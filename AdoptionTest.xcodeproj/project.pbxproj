@@ -23,6 +23,7 @@
 		81CE85CC1FC53E7A00321B3F /* AdoptionTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81CE85CA1FC53E7A00321B3F /* AdoptionTest.xcdatamodeld */; };
 		81CE85D31FC578C400321B3F /* JsonDatas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE85D11FC578C400321B3F /* JsonDatas+CoreDataClass.swift */; };
 		81CE85D41FC578C400321B3F /* JsonDatas+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CE85D21FC578C400321B3F /* JsonDatas+CoreDataProperties.swift */; };
+		81F2756A1FCD186F0059CC6A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F275691FCD186F0059CC6A /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,9 @@
 		81CE85CB1FC53E7A00321B3F /* AdoptionTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AdoptionTest.xcdatamodel; sourceTree = "<group>"; };
 		81CE85D11FC578C400321B3F /* JsonDatas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JsonDatas+CoreDataClass.swift"; sourceTree = "<group>"; };
 		81CE85D21FC578C400321B3F /* JsonDatas+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JsonDatas+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		81F275671FCD186D0059CC6A /* AdoptionTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdoptionTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		81F275681FCD186E0059CC6A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		81F275691FCD186F0059CC6A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,10 +92,12 @@
 		81B39E371FBC291900F71ED7 /* AdoptionTest */ = {
 			isa = PBXGroup;
 			children = (
+				81F2756B1FCD18740059CC6A /* Reachability */,
 				81B39E551FBC2B7400F71ED7 /* CoreData */,
 				812BD1201FBC2D9100A06688 /* ViewController */,
 				81B39E381FBC291900F71ED7 /* AppDelegate.swift */,
 				812BD11E1FBC2D7F00A06688 /* Common.swift */,
+				81F275671FCD186D0059CC6A /* AdoptionTest-Bridging-Header.h */,
 				81B39E3C1FBC291900F71ED7 /* Main.storyboard */,
 				81CE85781FC27A6100321B3F /* List.storyboard */,
 				81CE857A1FC27A7000321B3F /* Memo.storyboard */,
@@ -112,6 +118,15 @@
 				81CE858C1FC421E200321B3F /* JSONCoreData.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		81F2756B1FCD18740059CC6A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				81F275681FCD186E0059CC6A /* Reachability.h */,
+				81F275691FCD186F0059CC6A /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +161,7 @@
 				TargetAttributes = {
 					81B39E341FBC291900F71ED7 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -192,6 +208,7 @@
 				812BD1191FBC2D2D00A06688 /* ListTableViewController.swift in Sources */,
 				81CE85D31FC578C400321B3F /* JsonDatas+CoreDataClass.swift in Sources */,
 				812BD11F1FBC2D7F00A06688 /* Common.swift in Sources */,
+				81F2756A1FCD186F0059CC6A /* Reachability.m in Sources */,
 				81CE85CC1FC53E7A00321B3F /* AdoptionTest.xcdatamodeld in Sources */,
 				81B39E3B1FBC291900F71ED7 /* ViewController.swift in Sources */,
 				81CE858D1FC421E200321B3F /* JSONCoreData.swift in Sources */,
@@ -336,11 +353,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AdoptionTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.AdoptionTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdoptionTest/AdoptionTest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -350,11 +370,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AdoptionTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.AdoptionTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdoptionTest/AdoptionTest-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

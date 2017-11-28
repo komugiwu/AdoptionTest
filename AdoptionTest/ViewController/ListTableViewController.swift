@@ -30,6 +30,7 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Common().checkNetworkStatus(sender: self)
         getJSONData()
     }
 
