@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        JSONCoreData().setDatas()
+//        JSONCoreData().setDatas()
     }
     
     //MARK: Activies
