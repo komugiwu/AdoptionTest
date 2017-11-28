@@ -121,7 +121,8 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:
             UIActivityIndicatorViewStyle.gray)
         self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        self.activityIndicator.center = self.webView.center
+        //self.activityIndicator.center = self.webView.center
+        self.activityIndicator.center = CGPoint.init(x: webView.frame.size.width/2 - 25, y: webView.frame.size.height/2 - 25)
         self.activityIndicator.hidesWhenStopped = true
         webView.addSubview(self.activityIndicator)
         
