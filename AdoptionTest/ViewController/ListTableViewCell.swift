@@ -22,15 +22,14 @@ class ListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
 
-    //Set cell
+    //Set cell content
+    
     func setCells(fetchedResultsController: NSFetchedResultsController<JsonDatas>, indexPath: IndexPath) {
         Common().imageFromStringURL(imageView: urlImageView, string: fetchedResultsController.fetchedObjects![indexPath.section].image)
         nameLabel.text = fetchedResultsController.fetchedObjects![indexPath.section].hiragana

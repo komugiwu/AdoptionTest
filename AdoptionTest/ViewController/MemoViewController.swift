@@ -12,6 +12,7 @@ import WebKit
 class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, WKNavigationDelegate {
 
     //MARK: Properties
+    
     @IBOutlet weak var memoTextView: UITextView!
     @IBOutlet var webView: WKWebView!
     static var id: Int16?

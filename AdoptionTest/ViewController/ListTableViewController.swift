@@ -35,6 +35,7 @@ class ListTableViewController: UITableViewController {
     }
 
     //MARK: core data
+    
     func getJSONData() {
         do {
             try fetchedResultsController.performFetch()

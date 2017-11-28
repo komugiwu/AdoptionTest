@@ -78,29 +78,7 @@ class Common {
     }
     
     //MARK : Network related
-    
-    /*
-    func checkNetworkStatus(sender: Any) {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.reachabilityChanged, object: nil, queue: OperationQueue.main) { (NSNotification) -> Void in
-            let networksStatus: NetworkStatus = self.internetReachability.currentReachabilityStatus()
-            var status: String!
-            if networksStatus.rawValue == 0 {
-                status = "Disconnection"
-            }
-            else {
-                status = "Connection"
-            }
-            let alert = UIAlertController.init(title: "Network Status", message: status, preferredStyle: .alert)
-            let ok = UIAlertAction.init(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(ok)
-            (sender as AnyObject).present(alert, animated: true, completion: nil)
-        }
-        
-        self.internetReachability = Reachability.forInternetConnection();
-        self.internetReachability.startNotifier()
- 
-    }
-    */
+
     func checkNetworkStatus(sender: AnyObject) {
         let reachability: Reachability = Reachability.forInternetConnection()
         let networkStatus: Int = reachability.currentReachabilityStatus().rawValue
