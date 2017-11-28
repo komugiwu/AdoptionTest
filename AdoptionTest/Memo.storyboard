@@ -78,23 +78,23 @@
                                     <constraint firstAttribute="trailing" secondItem="Wbk-It-rfP" secondAttribute="trailing" constant="5" id="yw4-Dq-SSt"/>
                                 </constraints>
                             </view>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0s-dm-WWi">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWQ-pt-9Lz">
                                 <rect key="frame" x="0.0" y="64" width="375" height="476"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="leading" secondItem="U9H-UZ-PcN" secondAttribute="leading" id="9IA-L2-p9V"/>
-                            <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="d0s-dm-WWi" secondAttribute="bottom" id="Cbj-uV-VPX"/>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" id="EBb-pf-lHH"/>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="leading" secondItem="2bg-KZ-ZOG" secondAttribute="leading" id="GSK-PR-eKG"/>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="trailing" secondItem="U9H-UZ-PcN" secondAttribute="trailing" id="H5J-8o-vBQ"/>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" id="ZyE-o9-LGz"/>
+                            <constraint firstItem="dWQ-pt-9Lz" firstAttribute="leading" secondItem="U9H-UZ-PcN" secondAttribute="leading" id="AQ5-yA-5tG"/>
+                            <constraint firstItem="U9H-UZ-PcN" firstAttribute="trailing" secondItem="dWQ-pt-9Lz" secondAttribute="trailing" id="Fb6-8M-dOd"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="leading" secondItem="U9H-UZ-PcN" secondAttribute="leading" id="czZ-cd-MMg"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="trailing" secondItem="U9H-UZ-PcN" secondAttribute="trailing" id="etL-Y3-qX1"/>
-                            <constraint firstItem="d0s-dm-WWi" firstAttribute="trailing" secondItem="2bg-KZ-ZOG" secondAttribute="trailing" id="keZ-OQ-Dc1"/>
-                            <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="d0s-dm-WWi" secondAttribute="bottom" id="v7R-Gx-Alg"/>
+                            <constraint firstItem="dWQ-pt-9Lz" firstAttribute="top" secondItem="U9H-UZ-PcN" secondAttribute="top" id="mfn-GR-5Y0"/>
+                            <constraint firstItem="2bg-KZ-ZOG" firstAttribute="top" secondItem="dWQ-pt-9Lz" secondAttribute="bottom" id="pZV-so-7rG"/>
                             <constraint firstItem="2bg-KZ-ZOG" firstAttribute="bottom" secondItem="U9H-UZ-PcN" secondAttribute="bottom" id="vGv-Fc-zL4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U9H-UZ-PcN"/>
@@ -128,7 +128,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="memoTextView" destination="Wbk-It-rfP" id="dRX-vC-rZN"/>
-                        <outlet property="webView" destination="d0s-dm-WWi" id="tXf-fi-bHK"/>
+                        <outlet property="webView" destination="dWQ-pt-9Lz" id="mEY-94-7xL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twG-9w-SeC" userLabel="First Responder" sceneMemberID="firstResponder"/>

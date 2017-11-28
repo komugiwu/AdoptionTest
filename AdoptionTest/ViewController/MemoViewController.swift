@@ -50,6 +50,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         print(request)
         webView.load(request)
         setIndicatorView()
+        self.webView.navigationDelegate = self
     }
     
     func setNavigationItem() {

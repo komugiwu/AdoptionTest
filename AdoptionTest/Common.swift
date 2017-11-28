@@ -87,32 +87,4 @@ class Common {
         let intValue = Int16(string!)
         return intValue
     }
-    
-    /*
-    //MARK: Activity Indicator view
-   
-    func setIndicatorView(view: UIWebView) {
-        if Common.activityIndicator == nil {
-            Common.activityIndicator = UIActivityIndicatorView()
-        }
-        
-        Common.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:
-            UIActivityIndicatorViewStyle.gray)
-        Common.activityIndicator?.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        Common.activityIndicator?.center = view.center
-        Common.activityIndicator?.hidesWhenStopped = true
-        view.addSubview(Common.activityIndicator!);
-
-        Common().playIndicator()
-    }
-    
-    func playIndicator() {
-        Common.activityIndicator?.startAnimating()
-    }
-    
-    func stopIndicator() {
-        Common.activityIndicator?.stopAnimating()
-        
-    }
-    */
 }
