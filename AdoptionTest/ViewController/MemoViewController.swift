@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import WebKit
 
-class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate{
+class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, WKNavigationDelegate {
 
     //MARK: Properties
     @IBOutlet weak var memoTextView: UITextView!
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet var webView: WKWebView!
     static var id: Int16?
     static var url: URL?
     static var name: String?
@@ -27,7 +28,6 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         self.setWebView()
         self.setNavigationItem()
         self.setKeyboard()
-        setIndicatorView()
     }
     
     //MARK: Memo and Web Setting
@@ -45,18 +45,21 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     func setWebView() {
-        webView.delegate = self as? UIWebViewDelegate
-        setIndicatorView()
-        playIndicator()
         let request = URLRequest.init(url: MemoViewController.url!)
-        self.webView.loadRequest(request)
-        stopIndicator()
+        print(MemoViewController.url ?? "nil")
+        print(request)
+        webView.load(request)
+        setIndicatorView()
     }
     
     func setNavigationItem() {
         if let name = MemoViewController.name {
             self.navigationItem.title = name
         }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        stopIndicator()
     }
     
     //MARK: TextField delegate
@@ -117,7 +120,11 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             UIActivityIndicatorViewStyle.gray)
         self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         self.activityIndicator.center = self.webView.center
+        self.activityIndicator.hidesWhenStopped = true
         webView.addSubview(self.activityIndicator)
+        
+        playIndicator()
+        
         }
     
     func playIndicator() {
@@ -125,8 +132,13 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     func stopIndicator() {
-        DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
+        self.activityIndicator.stopAnimating()
+        if self.activityIndicator.isHidden {
+            print("true")
+        }
+        else {
+            self.activityIndicator.isHidden = true
+            print("set to true")
         }
     }
 }
