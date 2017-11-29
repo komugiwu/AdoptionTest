@@ -82,8 +82,12 @@ class JSONCoreData {
         let oldDatas = JSONCoreData().getDatasFromCoreData()
         let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
         JSONCoreData().cleanUpCoreData()
-        Common().setJsonDatas()
-        JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+        
+        let queue = DispatchQueue(label: "com.adoptiontest.komugi", qos: DispatchQoS.userInitiated)
+        queue.async {
+            Common().setJsonDatas()
+            JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+        }
     }
     
     //MARK : Memo functions
