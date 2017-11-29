@@ -72,7 +72,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="a2m-d6-2yK">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="2x2-rY-gMy">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="2x2-rY-gMy">
                             <view key="customView" contentMode="scaleToFill" id="bvs-Ww-lMt">
                                 <rect key="frame" x="16" y="2" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
