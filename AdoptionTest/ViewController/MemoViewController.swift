@@ -45,12 +45,10 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     func setWebView() {
+        self.webView.navigationDelegate = self
         let request = URLRequest.init(url: MemoViewController.url!)
-        print(MemoViewController.url ?? "nil")
-        print(request)
         webView.load(request)
         setIndicatorView()
-        self.webView.navigationDelegate = self
     }
     
     func setNavigationItem() {
@@ -101,7 +99,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
 
     @IBAction func saveMemoButton(_ sender: UIButton) {
         let memoContext = memoTextView.text
-        guard memoContext != nil else {
+        if memoContext == nil {
             return
         }
         if memoAtFirst != nil {

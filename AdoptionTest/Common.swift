@@ -39,10 +39,6 @@ class Common {
             return
         }
         
-        guard Common.jsonDatas == nil else {
-            return
-        }
-        
         let url = Bundle.main.url(forResource: "json", withExtension: "txt")
         
         do {
@@ -58,7 +54,7 @@ class Common {
 
     //Mark : List cell setting
     
-    func imageFromStringURL(imageView: UIImageView?, string: String?) {
+    func imageFromStringURL(imageView: UIImageView, string: String?) {
         var data: Data
         do {
             let url = Common().stringToURL(string: string)
@@ -70,11 +66,8 @@ class Common {
             //fatalError("Failed to load image from URL")
         }
  
-        guard let imgView = imageView else {
-            return
-        }
         let image = UIImage.init(data: data)!
-        imgView.image = image
+        imageView.image = image
     }
     
     //MARK : Network related
@@ -98,7 +91,7 @@ class Common {
     }
     
     func stringToInt16(string: String?) -> Int16? {
-        guard string != nil else {
+        if string == nil {
             return nil
         }
         let intValue = Int16(string!)

@@ -89,7 +89,7 @@ class JSONCoreData {
     //MARK : Memo functions
     
     func addMemo(id: Int16?, memo: String?) {
-        guard id != nil && memo != nil else {
+        if id == nil || memo == nil {
             return
         }
         
