@@ -13,7 +13,7 @@ class Common {
     
     //Properties
     
-    static var jsonDatas: Array<Dictionary<String, AnyObject>>?
+    //static var jsonDatas: Array<Dictionary<String, AnyObject>>?
     var internetReachability: Reachability!
     
     struct JsonKeys {
@@ -30,10 +30,9 @@ class Common {
         static let segueToListVC = "segue_vc_to_listvc"
         static let segueToMemoVC = "segue_to_memoVC"
     }
-    
 
     //Json related
-    
+    /*
     func setJsonDatas() {
         if Common.jsonDatas != nil {
             return
@@ -51,7 +50,8 @@ class Common {
             print(error.localizedDescription)
         }
     }
-
+    */
+ 
     //Mark : List cell setting
     
     func imageFromStringURL(imageView: UIImageView, string: String?) {
@@ -90,11 +90,8 @@ class Common {
         return URL(string: string!)
     }
     
-    func stringToInt16(string: String?) -> Int16? {
-        if string == nil {
-            return nil
-        }
+    func stringToInt16(string: String?) -> Int16 {
         let intValue = Int16(string!)
-        return intValue
+        return intValue!
     }
 }

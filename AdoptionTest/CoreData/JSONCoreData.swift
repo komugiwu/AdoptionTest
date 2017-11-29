@@ -16,6 +16,45 @@ class JSONCoreData {
     
     //MARK : Set JSON datas
     
+    func setJsonDatas(oldMemo: [Int16: String]?) {
+        let url = Bundle.main.url(forResource: "json", withExtension: "txt")
+        var jsonDatas: [[String: AnyObject]]? = [[:]]
+        
+        do {
+            let data = try Data.init(contentsOf: url!)
+            let jsonObjects = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:[[String: AnyObject]]]
+            jsonDatas = jsonObjects?[Common.JsonKeys.regions]
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        
+        if let datas = jsonDatas {
+            for data in datas {
+                let DataContext = NSEntityDescription.insertNewObject(forEntityName: JSONCoreData.entityName, into: JSONCoreData.moc) as! JsonDatas
+                DataContext.image = data[Common.JsonKeys.image] as? String
+                DataContext.name = data[Common.JsonKeys.name] as? String
+                DataContext.url = data[Common.JsonKeys.url] as? String
+                DataContext.hiragana = data[Common.JsonKeys.hiragana] as? String
+                DataContext.prefecture =  data[Common.JsonKeys.prefecture] as? [String]
+                DataContext.id = Common().stringToInt16(string: data[Common.JsonKeys.id] as? String)
+                if let oldMemo = oldMemo {
+                    for memo in oldMemo {
+                        if memo.key == DataContext.id {
+                            DataContext.memo = memo.value
+                        }
+                    }
+                }
+                do {
+                    try JSONCoreData.moc.save()
+                }
+                catch {
+                    fatalError("Failure to save context: \(error)")
+                }
+            }
+        }
+    }
+    /*
     func setDatasToCoreData(oldMemo: [Int16: String]?) {
         
         if let datas = Common.jsonDatas {
@@ -45,6 +84,7 @@ class JSONCoreData {
             }
         }
     }
+    */
     
     func getDatasFromCoreData() -> Array<JsonDatas>? {
         
@@ -85,8 +125,9 @@ class JSONCoreData {
         
         let queue = DispatchQueue(label: "com.adoptiontest.komugi", qos: DispatchQoS.userInitiated)
         queue.async {
-            Common().setJsonDatas()
-            JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+            //Common().setJsonDatas()
+            //JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+            JSONCoreData().setJsonDatas(oldMemo: oldMemo)
         }
     }
     

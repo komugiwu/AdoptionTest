@@ -72,13 +72,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var applicationDocumentsDirectory: NSURL = {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print(urls)
         return urls[urls.count-1] as NSURL
     }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         let modelURL = Bundle.main.url(forResource: "AdoptionTest", withExtension: "momd")!
-        print(modelURL)
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
@@ -89,7 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
-            print(coordinator)
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -108,7 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
-        print(coordinator)
         return managedObjectContext
     }()
     

@@ -133,12 +133,5 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func stopIndicator() {
         self.activityIndicator.stopAnimating()
-        if self.activityIndicator.isHidden {
-            print("true")
-        }
-        else {
-            self.activityIndicator.isHidden = true
-            print("set to true")
-        }
     }
 }
