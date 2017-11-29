@@ -40,7 +40,6 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             print(id)
             memoAtFirst = JSONCoreData().showMemo(id: id)
         }
-        
         memoTextView.text = memoAtFirst
         memoTextView.delegate = self
     }

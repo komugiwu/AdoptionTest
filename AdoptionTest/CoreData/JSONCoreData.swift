@@ -11,6 +11,7 @@ import CoreData
 
 class JSONCoreData {
     static let entityName = "JsonDatas"
+    static var memoContent: String?
     public static let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     //MARK : Set JSON datas
@@ -96,6 +97,7 @@ class JSONCoreData {
         
         MemoContext.id = id!
         MemoContext.memo = memo!
+        JSONCoreData.memoContent = memo!
         
         do {
             try JSONCoreData.moc.save()
@@ -113,6 +115,9 @@ class JSONCoreData {
             
             for result in results {
                 if id == result.id {
+                    if result.memo == nil {
+                        return JSONCoreData.memoContent
+                    }
                     return result.memo
                 }
             }
