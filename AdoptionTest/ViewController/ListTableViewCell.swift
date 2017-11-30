@@ -30,9 +30,9 @@ class ListTableViewCell: UITableViewCell {
 
     //Set cell content
     
-    func setCells(fetchedResultsController: NSFetchedResultsController<JsonDatas>, indexPath: IndexPath) {
-        Common().imageFromStringURL(imageView: urlImageView, string: fetchedResultsController.fetchedObjects![indexPath.section].image)
-        nameLabel.text = fetchedResultsController.fetchedObjects![indexPath.section].hiragana
-        prefectureLabel.text = fetchedResultsController.fetchedObjects![indexPath.section].prefecture?[indexPath.row]
+    func setCells(object: JsonDatas, row: Int) {
+        Common().imageFromStringURL(imageView: urlImageView, string: object.image)
+        nameLabel.text = object.hiragana
+        prefectureLabel.text = object.prefecture?[row]
     }
 }

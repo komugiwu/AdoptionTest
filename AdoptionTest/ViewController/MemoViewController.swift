@@ -21,6 +21,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     var activityIndicator: UIActivityIndicatorView!
     var memoContext :String?
     var memoAtFirst: String?
+    let indicatorSize = 50
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,13 +104,13 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         if memoContext == nil {
             return
         }
-        if memoAtFirst != nil {
-            JSONCoreData().updateMemoMemo(id: MemoViewController.id, memo: memoContext!)
-        }
-        else {
+        if memoAtFirst == nil {
             JSONCoreData().addMemo(id: MemoViewController.id, memo: memoContext)
         }
-    memoTextView.resignFirstResponder()
+        else {
+            JSONCoreData().updateMemoMemo(id: MemoViewController.id, memo: memoContext!)
+        }
+        memoTextView.resignFirstResponder()
     }
     
     //MARK: Activity Indicator related
@@ -118,14 +119,13 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         self.activityIndicator = UIActivityIndicatorView()
         self.activityIndicator = UIActivityIndicatorView(activityIndicatorStyle:
             UIActivityIndicatorViewStyle.gray)
-        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        self.activityIndicator.frame = CGRect(x: 0, y: 0, width: indicatorSize, height: indicatorSize)
         self.activityIndicator.center = CGPoint.init(x: webView.frame.size.width/2, y: webView.frame.size.height/2)
         self.activityIndicator.hidesWhenStopped = true
         webView.addSubview(self.activityIndicator)
         
         playIndicator()
-        
-        }
+    }
     
     func playIndicator() {
         self.activityIndicator.startAnimating()

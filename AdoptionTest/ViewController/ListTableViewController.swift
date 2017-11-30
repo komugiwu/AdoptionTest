@@ -9,12 +9,10 @@
 import UIKit
 import CoreData
 
-class ListTableViewController: UITableViewController {
+class ListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate  {
     
     //MARK: Properties
     
-    var seletedSection: Int?
-
     lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<JsonDatas> in
         let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         let fetchRequest: NSFetchRequest<JsonDatas> = JsonDatas.fetchRequest()
@@ -24,7 +22,7 @@ class ListTableViewController: UITableViewController {
                                                                   managedObjectContext: context,
                                                                   sectionNameKeyPath: "name",
                                                                   cacheName: nil)
-        fetchedResultsController.delegate = self as? NSFetchedResultsControllerDelegate
+        fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
     
@@ -59,7 +57,8 @@ class ListTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else {
             fatalError("The dequeued cell is not an instance of ListTableViewCell")
         }
-        cell.setCells(fetchedResultsController: fetchedResultsController, indexPath: indexPath)
+        let object = fetchedResultsController.fetchedObjects![indexPath.section]
+        cell.setCells(object: object, row: indexPath.row)
         return cell
     }
 
@@ -72,14 +71,13 @@ class ListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        seletedSection = indexPath.section
+        let object = fetchedResultsController.fetchedObjects![indexPath.section]
         self.performSegue(withIdentifier: Common.SegueName.segueToMemoVC, sender: indexPath)
-        if let selectedSection = seletedSection {
-
-            MemoViewController.id = fetchedResultsController.fetchedObjects![selectedSection].id
-            MemoViewController.url = Common().stringToURL(string: fetchedResultsController.fetchedObjects![selectedSection].url)
-            MemoViewController.name = fetchedResultsController.fetchedObjects![selectedSection].name
-        }
+        MemoViewController.id = object.id
+        
+        //MemoController use id fetch data of name and url is better.!!!!
+        MemoViewController.name = object.name
+        MemoViewController.url = Common().stringToURL(string: object.url)
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

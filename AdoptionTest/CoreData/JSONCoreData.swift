@@ -175,7 +175,7 @@ class JSONCoreData {
 
      func updateMemoMemo(id: Int16?, memo: String?) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
-     
+        
         do {
             let results = try JSONCoreData.moc.fetch(request) as! [JsonDatas]
      
