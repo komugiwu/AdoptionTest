@@ -28,7 +28,7 @@ class JSONCoreData {
     
     //MARK : Set JSON datas
     
-    func getDatas() {
+    func getSettingDatas() {
         do {
             try JSONCoreData.fetchedResultsController.performFetch()
         } catch {
