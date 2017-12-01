@@ -12,37 +12,13 @@ import CoreData
 class ListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate  {
     
     //MARK: Properties
-    /*
-    lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<JsonDatas> in
-        let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-        let fetchRequest: NSFetchRequest<JsonDatas> = JsonDatas.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: context,
-                                                                  sectionNameKeyPath: "name",
-                                                                  cacheName: nil)
-        fetchedResultsController.delegate = self
-        return fetchedResultsController
-    }()
-    */
+
     override func viewDidLoad() {
         super.viewDidLoad()
         JSONCoreData.fetchedResultsController.delegate = self
         Common().checkNetworkStatus(sender: self)
-        getJSONData()
-    }
-
-    //MARK: core data
-    
-    func getJSONData() {
-        do {
-            try JSONCoreData.fetchedResultsController.performFetch()
-        } catch {
-            fatalError("Failed to initialize FetchedResultsController: \(error)")
-        }
-    }
-    
+        JSONCoreData().getDatas()
+    }    
     
     // MARK: - Table view data source
 

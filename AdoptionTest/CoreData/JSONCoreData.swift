@@ -28,6 +28,14 @@ class JSONCoreData {
     
     //MARK : Set JSON datas
     
+    func getDatas() {
+        do {
+            try JSONCoreData.fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+    }
+    
     func setJsonDatas(oldMemo: [Int16: String]?) {
         let url = Bundle.main.url(forResource: "json", withExtension: "txt")
         var jsonDatas: [[String: AnyObject]]? = [[:]]
