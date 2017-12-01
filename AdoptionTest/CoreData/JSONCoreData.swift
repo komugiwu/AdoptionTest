@@ -11,9 +11,20 @@ import CoreData
 
 class JSONCoreData {
     let entityName = "JsonDatas"
-    //let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
-    let moc = ListTableViewController().fetchedResultsController.managedObjectContext
+    let moc = JSONCoreData.fetchedResultsController.managedObjectContext
     static var memoContent: String?
+    
+    static var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<JsonDatas> in
+        let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+        let fetchRequest: NSFetchRequest<JsonDatas> = JsonDatas.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: context,
+                                                                  sectionNameKeyPath: "name",
+                                                                  cacheName: nil)
+        return fetchedResultsController
+    }()
     
     //MARK : Set JSON datas
     
@@ -164,37 +175,9 @@ class JSONCoreData {
         MemoContext.memo = memo!
         JSONCoreData.memoContent = memo!
         saveData()
-        /*
-        do {
-            try moc.save()
-        }
-        catch {
-            fatalError("Failure to save context: \(error)")
-        }
-        */
     }
     
     func showMemo(id: Int16) -> String? {
-        /*
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        
-        do {
-            let results = try moc.fetch(request) as! [JsonDatas]
-            
-            for result in results {
-                if id == result.id {
-                    if result.memo == nil {
-                        return JSONCoreData.memoContent
-                    }
-                    return result.memo
-                }
-            }
-        }
-        catch {
-            fatalError("Failed to fetch data : \(error)")
-        }
-        return nil
-        */
         let request = getFetchRequest(ID: id)
         do {
             let results = try moc.fetch(request) as! [JsonDatas]
@@ -210,24 +193,6 @@ class JSONCoreData {
     }
 
      func updateMemoMemo(id: Int16?, memo: String?) {
-        /*
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        
-        do {
-            let results = try moc.fetch(request) as! [JsonDatas]
-     
-            for result in results {
-                if result.id == id && memo != nil {
-                    result.memo = memo
-                    try moc.save()
-                    return
-                }
-            }
-        }
-        catch {
-            fatalError("Failed to fetch data: \(error)")
-        }
-        */
         let request = getFetchRequest(ID: id)
         do {
             let results = try moc.fetch(request) as! [JsonDatas]

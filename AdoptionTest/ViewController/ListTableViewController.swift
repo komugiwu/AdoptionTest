@@ -12,7 +12,7 @@ import CoreData
 class ListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate  {
     
     //MARK: Properties
-    
+    /*
     lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<JsonDatas> in
         let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         let fetchRequest: NSFetchRequest<JsonDatas> = JsonDatas.fetchRequest()
@@ -25,9 +25,10 @@ class ListTableViewController: UITableViewController, NSFetchedResultsController
         fetchedResultsController.delegate = self
         return fetchedResultsController
     }()
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
+        JSONCoreData.fetchedResultsController.delegate = self
         Common().checkNetworkStatus(sender: self)
         getJSONData()
     }
@@ -36,7 +37,7 @@ class ListTableViewController: UITableViewController, NSFetchedResultsController
     
     func getJSONData() {
         do {
-            try fetchedResultsController.performFetch()
+            try JSONCoreData.fetchedResultsController.performFetch()
         } catch {
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
@@ -46,18 +47,18 @@ class ListTableViewController: UITableViewController, NSFetchedResultsController
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+        return JSONCoreData.fetchedResultsController.sections?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.fetchedObjects![section].prefecture?.count ?? 0
+        return JSONCoreData.fetchedResultsController.fetchedObjects![section].prefecture?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else {
             fatalError("The dequeued cell is not an instance of ListTableViewCell")
         }
-        let object = fetchedResultsController.fetchedObjects![indexPath.section]
+        let object = JSONCoreData.fetchedResultsController.fetchedObjects![indexPath.section]
         cell.setCells(object: object, row: indexPath.row)
         return cell
     }
@@ -67,11 +68,11 @@ class ListTableViewController: UITableViewController, NSFetchedResultsController
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return fetchedResultsController.sections![section].name
+        return JSONCoreData.fetchedResultsController.sections![section].name
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let object = fetchedResultsController.fetchedObjects![indexPath.section]
+        let object = JSONCoreData.fetchedResultsController.fetchedObjects![indexPath.section]
         self.performSegue(withIdentifier: Common.SegueName.segueToMemoVC, sender: indexPath)
         MemoViewController.id = object.id
         
