@@ -135,12 +135,11 @@ class JSONCoreData {
     //MARK : Common functions
     
     func getFetchRequest(ID: Int16?) -> NSFetchRequest<NSFetchRequestResult> {
-        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         if let ID = ID {
-            let predict = NSPredicate(format: "ID = \(ID)")
-            fetchReq.predicate = predict
+            request.predicate = NSPredicate(format: "id = \(ID)")
         }
-        return fetchReq
+        return request
     }
     
     func saveData() {
@@ -164,16 +163,19 @@ class JSONCoreData {
         MemoContext.id = id!
         MemoContext.memo = memo!
         JSONCoreData.memoContent = memo!
-        
+        saveData()
+        /*
         do {
             try moc.save()
         }
         catch {
             fatalError("Failure to save context: \(error)")
         }
+        */
     }
     
     func showMemo(id: Int16) -> String? {
+        /*
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
@@ -192,9 +194,23 @@ class JSONCoreData {
             fatalError("Failed to fetch data : \(error)")
         }
         return nil
+        */
+        let request = getFetchRequest(ID: id)
+        do {
+            let results = try moc.fetch(request) as! [JsonDatas]
+            if results[0].memo == nil {
+                return JSONCoreData.memoContent
+            }
+            return results[0].memo
+        }
+        catch {
+            fatalError("Failed to fetch data : \(error)")
+        }
+        return nil
     }
 
      func updateMemoMemo(id: Int16?, memo: String?) {
+        /*
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
@@ -207,6 +223,16 @@ class JSONCoreData {
                     return
                 }
             }
+        }
+        catch {
+            fatalError("Failed to fetch data: \(error)")
+        }
+        */
+        let request = getFetchRequest(ID: id)
+        do {
+            let results = try moc.fetch(request) as! [JsonDatas]
+            results[0].memo = memo
+            saveData()
         }
         catch {
             fatalError("Failed to fetch data: \(error)")
