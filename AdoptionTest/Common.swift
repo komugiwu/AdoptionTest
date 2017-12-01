@@ -52,7 +52,20 @@ class Common {
     }
     */
     
-    
+    func getJsonDatas() -> [[String: AnyObject]]? {
+        
+        let url = Bundle.main.url(forResource: "json", withExtension: "txt")
+        
+        do {
+            let data = try Data.init(contentsOf: url!)
+            let jsonObjects = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:[[String: AnyObject]]]
+            return jsonObjects![Common.JsonKeys.regions]
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        return nil
+    }
  
     //Mark : List cell setting
     
@@ -92,8 +105,8 @@ class Common {
         return URL(string: string!)
     }
     
-    func stringToInt16(string: String?) -> Int16 {
+    func stringToInt16(string: String?) -> Int16? {
         let intValue = Int16(string!)
-        return intValue!
+        return intValue
     }
 }

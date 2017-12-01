@@ -28,6 +28,64 @@ class JSONCoreData {
     
     //MARK : Set JSON datas
     
+    func setDatas() {
+        /*
+         let oldDatas = JSONCoreData().getAllDatasFromCoreData()
+         let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
+         JSONCoreData().cleanUpCoreData()
+         */
+        let queue = DispatchQueue(label: "com.adoptiontest.komugi", qos: DispatchQoS.userInitiated)
+        queue.async {
+            //Common().setJsonDatas()
+            //JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
+            //JSONCoreData().setJsonDatas(oldMemo: oldMemo)
+            self.setCoreDatas()
+        }
+        
+    }
+    
+    func setCoreDatas() {
+        let jsonOriginData = Common().getJsonDatas()!
+        for originData in jsonOriginData {
+            print("***************")
+            print(originData)
+            let id = Common().stringToInt16(string: originData[Common.JsonKeys.id] as? String)
+            let idCoreData = getData(ID: id!)
+            if idCoreData == nil {
+                //add
+                let dataContext = NSEntityDescription.insertNewObject(forEntityName: entityName, into: moc) as! JsonDatas
+                dataContext.id = id!
+                dataContext.name = originData[Common.JsonKeys.name] as? String
+                dataContext.image = originData[Common.JsonKeys.image] as? String
+                dataContext.hiragana = originData[Common.JsonKeys.hiragana] as? String
+                dataContext.url = originData[Common.JsonKeys.url] as? String
+                dataContext.prefecture = originData[Common.JsonKeys.prefecture] as? [String]
+                print("***************")
+                print(dataContext)
+            }
+            else {
+                //update
+                do {
+                    let request = getFetchRequest(ID: id)
+                    let results = try moc.fetch(request) as! [JsonDatas]
+                    print(results[0])
+                    let dataContext = results[0]
+                    dataContext.name = originData[Common.JsonKeys.name] as? String
+                    dataContext.image = originData[Common.JsonKeys.image] as? String
+                    dataContext.url = originData[Common.JsonKeys.url] as? String
+                    dataContext.hiragana = originData[Common.JsonKeys.hiragana] as? String
+                    dataContext.prefecture = originData[Common.JsonKeys.prefecture] as? [String]
+                    print("***************")
+                    print(dataContext)
+                }
+                catch {
+                    fatalError("Failed to fetch data: \(error)")
+                }
+            }
+            saveData()
+        }
+    }
+    
     func getSettingDatas() {
         do {
             try JSONCoreData.fetchedResultsController.performFetch()
@@ -35,7 +93,7 @@ class JSONCoreData {
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
     }
-    
+    /*
     func setJsonDatas(oldMemo: [Int16: String]?) {
         let url = Bundle.main.url(forResource: "json", withExtension: "txt")
         var jsonDatas: [[String: AnyObject]]? = [[:]]
@@ -74,6 +132,8 @@ class JSONCoreData {
             }
         }
     }
+    */
+ 
     /*
     func setDatasToCoreData(oldMemo: [Int16: String]?) {
         
@@ -105,7 +165,7 @@ class JSONCoreData {
         }
     }
     */
-    
+   /*
     func getAllDatasFromCoreData() -> Array<JsonDatas>? {
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -118,7 +178,8 @@ class JSONCoreData {
         }
         return nil
     }
- 
+    */
+    /*
     func cleanUpCoreData() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
@@ -137,20 +198,7 @@ class JSONCoreData {
             fatalError("Failed to fetch data: \(error)")
         }
     }
-    
-    func setDatas() {
-        let oldDatas = JSONCoreData().getAllDatasFromCoreData()
-        let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
-        JSONCoreData().cleanUpCoreData()
-        
-        let queue = DispatchQueue(label: "com.adoptiontest.komugi", qos: DispatchQoS.userInitiated)
-        queue.async {
-            //Common().setJsonDatas()
-            //JSONCoreData().setDatasToCoreData(oldMemo: oldMemo)
-            JSONCoreData().setJsonDatas(oldMemo: oldMemo)
-        }
-    }
-    
+    */
     //MARK : Common functions
     
     func getFetchRequest(ID: Int16?) -> NSFetchRequest<NSFetchRequestResult> {
@@ -174,6 +222,10 @@ class JSONCoreData {
         let request = getFetchRequest(ID: ID)
         do {
             let datas = try moc.fetch(request) as? [JsonDatas]
+
+            if datas!.count == 0 {
+                return nil
+            }
             return datas![0]
         }
         catch {
@@ -223,17 +275,17 @@ class JSONCoreData {
             fatalError("Failed to fetch data: \(error)")
         }
      }
-
+    /*
     func getOldMemo(jsonDatas: Array<JsonDatas>?) -> [Int16: String]? {
         
         if jsonDatas == nil {
             return nil
         }
-
         var memoDatas: [Int16: String] = [:]
         for data in jsonDatas! {
             memoDatas[data.id] = data.memo
         }
         return memoDatas
     }
+    */
 }

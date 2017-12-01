@@ -24,6 +24,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Common().checkNetworkStatus(sender: self)
         self.setObjectData(ID: MemoViewController.id!)
         self.setMemo(textView: memoTextView)
         self.setWebView()

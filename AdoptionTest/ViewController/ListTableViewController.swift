@@ -15,7 +15,6 @@ class ListTableViewController: UITableViewController, NSFetchedResultsController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Common().checkNetworkStatus(sender: self)
         JSONCoreData.fetchedResultsController.delegate = self
         JSONCoreData().getSettingDatas()
     }
