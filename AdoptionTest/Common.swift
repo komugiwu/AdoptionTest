@@ -13,7 +13,6 @@ class Common {
     
     //Properties
     
-    //static var jsonDatas: Array<Dictionary<String, AnyObject>>?
     var internetReachability: Reachability!
     
     struct JsonKeys {
@@ -32,26 +31,7 @@ class Common {
     }
 
     //Json related
-    /*
-    func setJsonDatas() {
-        if Common.jsonDatas != nil {
-            return
-        }
-        
-        let url = Bundle.main.url(forResource: "json", withExtension: "txt")
-        
-        do {
-            let data = try Data.init(contentsOf: url!)
-            let jsonObjects = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary<String, Array<Dictionary<String, AnyObject>>>
-            //print(jsonObjects ?? "nil")
-            Common.jsonDatas = jsonObjects?[JsonKeys.regions]
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-    }
-    */
-    
+
     func getJsonDatas() -> [[String: AnyObject]]? {
         
         let url = Bundle.main.url(forResource: "json", withExtension: "txt")
@@ -76,9 +56,7 @@ class Common {
             try data = Data(contentsOf: url!)
         }
         catch {
-            print("failed to load image from URL")
-            return
-            //fatalError("Failed to load image from URL")
+            fatalError("Failed to load image from URL")
         }
  
         let image = UIImage.init(data: data)!

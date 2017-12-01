@@ -16,7 +16,6 @@ class ListTableViewController: UITableViewController, NSFetchedResultsController
     override func viewDidLoad() {
         super.viewDidLoad()
         JSONCoreData.fetchedResultsController.delegate = self
-        JSONCoreData().getSettingDatas()
     }
     
     // MARK: - Table view data source

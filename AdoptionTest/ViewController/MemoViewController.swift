@@ -42,7 +42,8 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         let id = MemoViewController.id
         if let id = id {
-            memoAtFirst = JSONCoreData().showMemo(id: id)
+            data = JSONCoreData().getData(ID: id)
+            memoAtFirst = data?.memo
         }
         memoTextView.text = memoAtFirst
         memoTextView.delegate = self
@@ -109,12 +110,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         if memoContext == nil {
             return
         }
-        if memoAtFirst == nil {
-            JSONCoreData().addMemo(id: MemoViewController.id, memo: memoContext)
-        }
-        else {
-            JSONCoreData().updateMemoMemo(id: MemoViewController.id, memo: memoContext!)
-        }
+        JSONCoreData().updateMemoMemo(id: MemoViewController.id, memo: memoContext!)
         memoTextView.resignFirstResponder()
     }
     
