@@ -11,7 +11,8 @@ import CoreData
 
 class JSONCoreData {
     let entityName = "JsonDatas"
-    let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+    //let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+    let moc = ListTableViewController().fetchedResultsController.managedObjectContext
     static var memoContent: String?
     
     //MARK : Set JSON datas
