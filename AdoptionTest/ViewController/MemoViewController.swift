@@ -16,8 +16,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var memoTextView: UITextView!
     @IBOutlet var webView: WKWebView!
     static var id: Int16?
-    static var url: URL?
-    static var name: String?
+    var data: JsonDatas?
     var activityIndicator: UIActivityIndicatorView!
     var memoContext :String?
     var memoAtFirst: String?
@@ -25,7 +24,7 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setObjectData(ID: MemoViewController.id!)
         self.setMemo(textView: memoTextView)
         self.setWebView()
         self.setNavigationItem()
@@ -33,6 +32,10 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     //MARK: Memo and Web Setting
+    
+    func setObjectData(ID: Int16) {
+        data = JSONCoreData().getData(ID: ID)
+    }
     
     func setMemo(textView: UITextView) {
         
@@ -47,14 +50,15 @@ class MemoViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     func setWebView() {
         self.webView.navigationDelegate = self
         DispatchQueue.main.async {
-            let request = URLRequest.init(url: MemoViewController.url!)
+            let url = Common().stringToURL(string: self.data!.url)
+            let request = URLRequest.init(url: url!)
             self.webView.load(request)
             self.setIndicatorView()
         }
     }
     
     func setNavigationItem() {
-        if let name = MemoViewController.name {
+        if let name = data!.name {
             self.navigationItem.title = name
         }
     }

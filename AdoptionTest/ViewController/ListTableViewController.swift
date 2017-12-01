@@ -51,10 +51,6 @@ class ListTableViewController: UITableViewController, NSFetchedResultsController
         let object = JSONCoreData.fetchedResultsController.fetchedObjects![indexPath.section]
         self.performSegue(withIdentifier: Common.SegueName.segueToMemoVC, sender: indexPath)
         MemoViewController.id = object.id
-        
-        //MemoController use id fetch data of name and url is better.!!!!
-        MemoViewController.name = object.name
-        MemoViewController.url = Common().stringToURL(string: object.url)
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

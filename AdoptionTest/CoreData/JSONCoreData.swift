@@ -106,7 +106,7 @@ class JSONCoreData {
     }
     */
     
-    func getDatasFromCoreData() -> Array<JsonDatas>? {
+    func getAllDatasFromCoreData() -> Array<JsonDatas>? {
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
@@ -139,7 +139,7 @@ class JSONCoreData {
     }
     
     func setDatas() {
-        let oldDatas = JSONCoreData().getDatasFromCoreData()
+        let oldDatas = JSONCoreData().getAllDatasFromCoreData()
         let oldMemo = JSONCoreData().getOldMemo(jsonDatas: oldDatas)
         JSONCoreData().cleanUpCoreData()
         
@@ -168,6 +168,18 @@ class JSONCoreData {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror.localizedDescription), \(nserror.userInfo)")
         }
+    }
+    
+    func getData(ID: Int16) -> JsonDatas? {
+        let request = getFetchRequest(ID: ID)
+        do {
+            let datas = try moc.fetch(request) as? [JsonDatas]
+            return datas![0]
+        }
+        catch {
+            fatalError("Failed to fetch data : \(error)")
+        }
+        return nil
     }
     
     //MARK : Memo functions
