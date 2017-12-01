@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 
 class JSONCoreData {
-    static let entityName = "JsonDatas"
+    let entityName = "JsonDatas"
+    let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     static var memoContent: String?
-    public static let moc = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     //MARK : Set JSON datas
     
@@ -31,7 +31,7 @@ class JSONCoreData {
         
         if let datas = jsonDatas {
             for data in datas {
-                let DataContext = NSEntityDescription.insertNewObject(forEntityName: JSONCoreData.entityName, into: JSONCoreData.moc) as! JsonDatas
+                let DataContext = NSEntityDescription.insertNewObject(forEntityName: entityName, into: moc) as! JsonDatas
                 DataContext.image = data[Common.JsonKeys.image] as? String
                 DataContext.name = data[Common.JsonKeys.name] as? String
                 DataContext.url = data[Common.JsonKeys.url] as? String
@@ -46,7 +46,7 @@ class JSONCoreData {
                     }
                 }
                 do {
-                    try JSONCoreData.moc.save()
+                    try moc.save()
                 }
                 catch {
                     fatalError("Failure to save context: \(error)")
@@ -59,7 +59,7 @@ class JSONCoreData {
         
         if let datas = Common.jsonDatas {
             for data in datas {
-                let DataContext = NSEntityDescription.insertNewObject(forEntityName: JSONCoreData.entityName, into: JSONCoreData.moc) as! JsonDatas
+                let DataContext = NSEntityDescription.insertNewObject(forEntityName: entityName, into: moc) as! JsonDatas
                 
                 DataContext.image = data[Common.JsonKeys.image] as? String
                 DataContext.name = data[Common.JsonKeys.name] as? String
@@ -76,7 +76,7 @@ class JSONCoreData {
                     }
                 }
                 do {
-                    try JSONCoreData.moc.save()
+                    try moc.save()
                 }
                 catch {
                     fatalError("Failure to save context: \(error)")
@@ -88,10 +88,10 @@ class JSONCoreData {
     
     func getDatasFromCoreData() -> Array<JsonDatas>? {
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
-            return try JSONCoreData.moc.fetch(request) as? [JsonDatas]
+            return try moc.fetch(request) as? [JsonDatas]
         }
         catch {
             fatalError("Failed to fetch data : \(error)")
@@ -100,14 +100,14 @@ class JSONCoreData {
     }
  
     func cleanUpCoreData() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
-            let results = try JSONCoreData.moc.fetch(request) as! [JsonDatas]
+            let results = try moc.fetch(request) as! [JsonDatas]
             for result in results {
-                JSONCoreData.moc.delete(result)
+                moc.delete(result)
             }
             do {
-                try JSONCoreData.moc.save()
+                try moc.save()
             }
             catch {
                 fatalError("Failure to save context: \(error)")
@@ -131,6 +131,26 @@ class JSONCoreData {
         }
     }
     
+    //MARK : Common functions
+    
+    func getFetchRequest(ID: Int16?) -> NSFetchRequest<NSFetchRequestResult> {
+        let fetchReq = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        if let ID = ID {
+            let predict = NSPredicate(format: "ID = \(ID)")
+            fetchReq.predicate = predict
+        }
+        return fetchReq
+    }
+    
+    func saveData() {
+        do {
+            try moc.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror.localizedDescription), \(nserror.userInfo)")
+        }
+    }
+    
     //MARK : Memo functions
     
     func addMemo(id: Int16?, memo: String?) {
@@ -138,14 +158,14 @@ class JSONCoreData {
             return
         }
         
-        let MemoContext = NSEntityDescription.insertNewObject(forEntityName: JSONCoreData.entityName, into: JSONCoreData.moc) as! JsonDatas
+        let MemoContext = NSEntityDescription.insertNewObject(forEntityName: entityName, into: moc) as! JsonDatas
         
         MemoContext.id = id!
         MemoContext.memo = memo!
         JSONCoreData.memoContent = memo!
         
         do {
-            try JSONCoreData.moc.save()
+            try moc.save()
         }
         catch {
             fatalError("Failure to save context: \(error)")
@@ -153,10 +173,10 @@ class JSONCoreData {
     }
     
     func showMemo(id: Int16) -> String? {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
-            let results = try JSONCoreData.moc.fetch(request) as! [JsonDatas]
+            let results = try moc.fetch(request) as! [JsonDatas]
             
             for result in results {
                 if id == result.id {
@@ -174,15 +194,15 @@ class JSONCoreData {
     }
 
      func updateMemoMemo(id: Int16?, memo: String?) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: JSONCoreData.entityName)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         do {
-            let results = try JSONCoreData.moc.fetch(request) as! [JsonDatas]
+            let results = try moc.fetch(request) as! [JsonDatas]
      
             for result in results {
                 if result.id == id && memo != nil {
                     result.memo = memo
-                    try JSONCoreData.moc.save()
+                    try moc.save()
                     return
                 }
             }
